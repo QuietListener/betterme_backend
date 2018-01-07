@@ -38,12 +38,20 @@ class IndexController < ApplicationController
     id = params[:id]
     plan = Plan.where("id=?",id).first
     respond_to_ok(plan,"")
+
   end
 
   def plans
     user_id = params[:user_id]
     plans = Plan.where("user_id=?",user_id).order("updated_at desc");
-    respond_to_ok(plans,"")
+
+    plans_ = plans.map{|p|
+      p_ = p.as_json;
+      p_["finished_daka_today"] = p.finished_daka_today();
+      p_
+    }
+
+    respond_to_ok(plans_,"")
   end
 
 
