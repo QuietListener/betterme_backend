@@ -34,11 +34,17 @@ class IndexController < ApplicationController
   end
 
 
+  def plan_records_stat(plan)
+      plan_id = plan.id
+      finished_days = PlanRecord.where("plan_id = ?",plan_id).count
+      total_days = (plan.end - plan.start).to_i/86400
+      return total_days,finished_days
+  end
+
   def plan
     id = params[:id]
     plan = Plan.where("id=?",id).first
     respond_to_ok(plan,"")
-
   end
 
   def plans
@@ -48,6 +54,9 @@ class IndexController < ApplicationController
     plans_ = plans.map{|p|
       p_ = p.as_json;
       p_["finished_daka_today"] = p.finished_daka_today();
+      total_days , finished_days = plan_records_stat(p)
+      p_["total_days"] = total_days
+      p_["finished_days"] = finished_days
       p_
     }
 
@@ -58,7 +67,6 @@ class IndexController < ApplicationController
   def create_plan_record
     plan_id = params[:plan_id]
     plan = Plan.where(:id => plan_id).first
-
     pr = PlanRecord.new
     pr.user_id=plan.user_id
     pr.plan_id = plan.id
