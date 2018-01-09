@@ -65,12 +65,14 @@ class IndexController < ApplicationController
 
 
   def create_plan_record
+
     plan_id = params[:plan_id]
     plan = Plan.where(:id => plan_id).first
     pr = PlanRecord.new
     pr.user_id=plan.user_id
     pr.plan_id = plan.id
     pr.desc = params[:desc].strip
+    pr.images = JSON.dump(params[:images]);
     pr.save
 
     prs = PlanRecord.where("plan_id = ?",plan.id)
