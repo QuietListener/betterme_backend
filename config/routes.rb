@@ -56,6 +56,8 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
+  get "index/test1"=>"index#test1"
+
   match 'index/create_plan'=> 'application#options_result',via: [:options]
   match 'index/create_plan_record'=> 'application#options_result',via: [:options]
 
