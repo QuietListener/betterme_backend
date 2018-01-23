@@ -10,6 +10,11 @@ class IndexController < ApplicationController
 
   end
 
+
+  def home
+
+  end
+
   def register
     username = params[:username]
     password = parasm[:password]
