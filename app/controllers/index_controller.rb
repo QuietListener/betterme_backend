@@ -42,18 +42,31 @@ class IndexController < ApplicationController
   end
 
   def create_plan
+
+      id = params[:id]
       name = params[:name].strip
       start_time = params[:start_time]
       end_time = params[:end_time]
 
       user = User.first
 
-      p = Plan.where("user")
+      p = Plan.where("name=? and user_id = ?",name,user.id);
       if(p ！= nil)
         raise Exception("已经有一个重名的plan了")
       end
 
+
       p = Plan.new
+      if not id.blank?
+        p = Plan.find(id);
+        if p.blank?
+          raise Exception.new("没有id为#{id}的计划")
+        end
+      end
+
+
+
+
       p.user_id = user.id
       p.name = name
       p.start = start_time
@@ -61,6 +74,35 @@ class IndexController < ApplicationController
       p.save;
 
       respond_to_ok(p,"");
+  end
+
+
+  def create_or_update_alert_(user_id,plan_id,hours,minutes)
+    pa = PlanAlert.where("user_id = ? and plan_id = ?",user_id,plan_id).first;
+
+    if pa.blank?
+      pa = PlanAlert.new
+    end
+
+    pa.plan_id = plan_id
+    pa.user_id= user_id
+    pa.hours= hours
+    pa.minutes=minutes
+
+    pa.save
+
+    return pa
+  end
+
+  def create_or_update_alert
+    plan_id = params[:plan_id]
+    user = User.first
+
+    hours = params[:hours].strip
+    minutes = params[:minutes].strip
+    pa = create_or_update_alert_(user.id,plan_id,hours,minutes)
+    respond_to_ok(pa,"");
+
   end
 
 

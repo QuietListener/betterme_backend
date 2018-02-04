@@ -61,10 +61,13 @@ Rails.application.routes.draw do
 
   match 'index/create_plan'=> 'application#options_result',via: [:options]
   match 'index/create_plan_record'=> 'application#options_result',via: [:options]
+  match 'index/create_or_update_alert'=> 'application#options_result',via: [:options]
 
   get 'index/user' => "index#user"
   post 'index/create_plan' => "index#create_plan"
   post 'index/create_plan_record' => "index#create_plan_record"
+  post 'index/create_or_update_alert' => "index#create_or_update_alert"
+
   get  'index/plans' => "index#plans"
   get  'index/plan' => "index#plan"
   get  'index/plan_records' => "index#plan_records"
