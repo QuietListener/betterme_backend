@@ -29,12 +29,17 @@ class BUtils
     FileUtils.copy(from_file,new_file_name)
   end
 
-  def self.get_upload_file(file_name)
+  def self.get_upload_file_path(file_name)
     return nil if blank?(file_name)
 
     base_dir = "#{Rails.root.to_s}/public/upload/"
     file_path = "#{base_dir}/#{file_name}"
+    return file_path
+  end
 
+  def self.get_upload_file(file_name)
+    return nil if blank?(file_name)
+    file_path = get_upload_file_path(file_name)
     return nil unless File.exist?file_path
     return file_path
   end

@@ -47,11 +47,19 @@ class ApplicationController < ActionController::Base
     if not BUtils.blank?params[:images]
 
       new_names = []
-      params[:images].map do |file|
+      params[:images].each do |file|
         org_name = file.original_filename
-        new_name = BUtils.time_format_now() + "_" + rand(100000).to_s +  "_"+ org_name;
+        prefix = BUtils.time_format_now() + "_" + rand(100000).to_s+"_";
+
+        new_name = prefix + org_name;
+        new_name_resize = "rs1_" + prefix+ org_name;
 
         BUtils.save_file(file.tempfile,new_name)
+        Rails.logger.info("#{org_name} save as #{new_name}");
+
+        from_path = BUtils.get_upload_file(new_name)
+        to_path = BUtils.get_upload_file_path(new_name_resize)
+        BUtils.resize_image(from_path,to_path,[600,450]);
         new_names << new_name;
 
       end

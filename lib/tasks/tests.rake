@@ -21,3 +21,27 @@ task :test_resize_img  => :environment do
 
 
 end
+
+#没有resize的图片
+task :fix_resize_img  => :environment do
+  imgbase = "#{public}/upload"
+
+   Dir.entries(imgbase).each do |f|
+     f_path = "#{imgbase}/#{f}";
+     puts "fix_resize_img-#{f}";
+     if f =="." or f == ".."  or File.directory? f_path
+       next;
+     end
+
+
+     rs_f_path = "#{imgbase}/rs1_#{f}";
+
+     puts("#{f_path} => #{rs_f_path}");
+
+     if not File.exist? rs_f_path
+       BUtils.resize_image(f_path, rs_f_path)
+     end
+   end
+
+end
+
