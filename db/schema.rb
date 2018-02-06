@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204105717) do
+ActiveRecord::Schema.define(version: 20180206150031) do
 
   create_table "plan_alerts", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 20180204105717) do
     t.string   "access_token", limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "provider",     limit: 4,   null: false
+    t.string   "unionid",      limit: 255
+    t.string   "openid",       limit: 255
+    t.string   "country",      limit: 255
+    t.string   "province",     limit: 255
+    t.string   "city",         limit: 255
+    t.string   "user_token",   limit: 255
   end
 
 end
