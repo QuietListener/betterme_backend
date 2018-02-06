@@ -72,4 +72,7 @@ Rails.application.routes.draw do
   get  'index/plan' => "index#plan"
   get  'index/plan_records' => "index#plan_records"
 
+  get   "weixin/wein_login_call_back_snsapi_base"=>"weixin#wein_login_call_back_snsapi_base"
+
+
 end

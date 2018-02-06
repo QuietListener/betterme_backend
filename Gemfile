@@ -47,3 +47,20 @@ group :development do
   gem 'spring'
 end
 
+
+
+gem 'httpclient'
+gem 'qiniu-rs'
+gem 'rubyzip', '>= 1.0.0' # will load new rubyzip version
+gem 'zip-zip' # will load compatibility for old rubyzip API.
+
+#html parse
+gem 'nokogiri',"1.8.1"
+gem "streamio-ffmpeg"
+gem 'test-unit'
+gem "mini_magick",'4.3.5'
+
+#导出为xls
+gem 'spreadsheet'
+gem 'ruby-ole'
+gem 'rest-client'
