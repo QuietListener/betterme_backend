@@ -73,6 +73,6 @@ Rails.application.routes.draw do
   get  'index/plan_records' => "index#plan_records"
 
   get   "weixin/wein_login_call_back_snsapi_base"=>"weixin#wein_login_call_back_snsapi_base"
-
+  get   "weixin/get_share_config"=>"weixin#get_share_config"
 
 end

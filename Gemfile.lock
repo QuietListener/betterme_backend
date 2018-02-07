@@ -87,6 +87,7 @@ GEM
     netrc (0.11.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    oj (2.18.5)
     power_assert (1.0.2)
     qiniu-rs (3.4.10)
       json (~> 1.7)
@@ -202,6 +203,7 @@ DEPENDENCIES
   mini_magick (= 4.3.5)
   mysql2 (>= 0.3.13, < 0.5)
   nokogiri (= 1.8.1)
+  oj
   qiniu-rs
   rails (= 4.2.8)
   rest-client

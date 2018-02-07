@@ -1,9 +1,10 @@
+require 'oj'
 
 class WeixinApi
 
   #BCZ_WEIXIN_APP = {'appid' => 'wxcfbbac84baa7a51b', 'appsecret' => '54424b2aa76f9a0f33ff304d6ca487fa'}
   #PAP_WEIXIN_APP = {'appid' => 'wxa046348e92d916f5', 'appsecret' => '28e9645a4f2f3c0ba47f37dfe7ff306a'}
-  JUDU_WEIXIN_APP = {'appid' => 'wxdddcdccbfc909f74', 'appsecret' => 'c19014bcb03f0bd3b711ac95da4e48f8'}
+  JUDU_WEIXIN_APP = {'appid' => $appid, 'appsecret' =>$app_secret}
 
   
   def self.get_api_token(appid, appsecret)

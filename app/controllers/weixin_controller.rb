@@ -1,6 +1,7 @@
 #encoding:utf-8
 #配置任务
 require 'digest/sha1'
+require "#{Rails.root.to_s}/lib/weixin_api.rb"
 
 class WeixinController < ApplicationController
   #protect_from_forgery
@@ -61,7 +62,22 @@ class WeixinController < ApplicationController
 
   end
 
+
+
+  def get_share_config
+    url = "http://4e3ab72f.ngrok.io/home"
+    config = WeixinApi.get_weixin_share_config(WeixinApi::JUDU_WEIXIN_APP,url)
+    ret = {
+        config:config,
+        url:url,
+        desc:"测试一下"
+    }
+
+    render json: ret
+  end
+
 end
+
 
 
 #{"openid":"oGCPmw5ajMA33vczHJylSmORcWnQ","nickname":"君君","sex":1,"language":"zh_CN","city":"成都","province":"四川","country":"中国","headimgurl":"http:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTKBicCDZnwQyerMibwxRTygO0OBjDOEib2lElMS0HzYiawXg3mFtdV5vEicYkZFPCotzruHQZhzWzpLfsg\/132","privilege":[]}
