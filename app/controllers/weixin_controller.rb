@@ -65,11 +65,12 @@ class WeixinController < ApplicationController
 
 
   def get_share_config
-    url = "http://4e3ab72f.ngrok.io/home"
+    url = "http://localhost:8080/home"
     config = WeixinApi.get_weixin_share_config(WeixinApi::JUDU_WEIXIN_APP,url)
     ret = {
         config:config,
         url:url,
+        title:"测试",
         desc:"测试一下"
     }
 
