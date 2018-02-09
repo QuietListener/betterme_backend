@@ -56,8 +56,8 @@ class IndexController < ApplicationController
 
 
       p = Plan.new
-      if not id.blank?
-        p = Plan.find(id);
+      if not id.blank? and id.to_i >= 0
+        p = Plan.where(:id=>id).first;
         if p.blank?
           raise Exception.new("没有id为#{id}的计划")
         end
