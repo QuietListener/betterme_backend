@@ -1,6 +1,6 @@
 class IndexController < ApplicationController
 
-  before_filter :add_cors_headers
+  before_filter :add_cors_headers,:get_user
 
   def index
     logger.info request.inspect
@@ -37,8 +37,7 @@ class IndexController < ApplicationController
   end
 
   def user
-    u = User.first
-    respond_to_ok(u,"");
+    respond_to_ok(@user,"");
   end
 
   def create_plan
@@ -48,7 +47,7 @@ class IndexController < ApplicationController
       start_time = params[:start_time]
       end_time = params[:end_time]
 
-      user = User.first
+      user = @user
 
       p = Plan.where("name=? and user_id = ?",name,user.id);
       if(p ！= nil)
@@ -95,8 +94,9 @@ class IndexController < ApplicationController
   end
 
   def create_or_update_alert
+
     plan_id = params[:plan_id]
-    user = User.first
+    user = @user
 
     hours = params[:hours].strip
     minutes = params[:minutes].strip
@@ -135,7 +135,7 @@ class IndexController < ApplicationController
   end
 
   def plans
-    user_id = params[:user_id]
+    user_id = @user.id
     plans = Plan.where("user_id=?",user_id).order("updated_at desc");
     plans_ = plans.map{|p|   plan_decorate(p)  }
     respond_to_ok(plans_,"")

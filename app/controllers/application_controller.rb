@@ -8,7 +8,23 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
 
   before_filter :add_cors_headers,:rename_upload_file
+
   rescue_from Exception, with: :show_error
+
+  def  get_user
+    access_token = cookies[:access_token]
+    if access_token.blank?
+      raise Exception.new("没有登录")
+    end
+
+    @user = User.where(:access_token => access_token).first
+
+    if access_token.blank?
+      raise Exception.new("登录过期")
+    end
+
+
+  end
 
   def add_cors_headers
     headers['Access-Control-Allow-Origin'] = '*'

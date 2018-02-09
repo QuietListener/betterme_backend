@@ -8,7 +8,7 @@ class WeixinController < ApplicationController
   # skip_before_filter :login_filter,:only => [:login,:logout,:index,:register]
   # before_filter :login_filter,only: [:user_info]
 
-  #https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc8c2179b9a8c63ef&redirect_uri=http%3A%2F%2F4e3ab72f.ngrok.io%2Fweixin%2Fwein_login_call_back_snsapi_base&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+  #https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc8c2179b9a8c63ef&redirect_uri=http%3A%2F%2F21bebd7c.ngrok.io%2Fweixin%2Fwein_login_call_back_snsapi_base&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
   #注意 scope=snsapi_userinfo 才行, 使用 snsapi_base会在 str_user_info = RestClient.get(str_user_info_url)出错
   def wein_login_call_back_snsapi_base
       code = params[:code]
@@ -49,7 +49,7 @@ class WeixinController < ApplicationController
             cookies[:access_token] = {
                 :value => u.access_token,
                 :expires => 1.year.from_now,
-                :domain => '4e3ab72f.ngrok.io'
+                :domain => '21bebd7c.ngrok.io'
             }
           end
 
