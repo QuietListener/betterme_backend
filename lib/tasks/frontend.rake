@@ -13,8 +13,7 @@ task :genjs  => :environment do
     `rm #{base}/public/bundle* `
     `rm #{base}/public/vendors.js`
 
-
-    `cd  #{base}; webpack --config #{base}/webpack.production.config.js`
+    `export NODE_ENV=development; cd  #{base}; webpack --config #{base}/webpack.production.config.js`
     `cp #{base}/public/bundle*  #{public}/js/main.js`
     `cp #{base}/public/vendors.js  #{public}/js/vendors.js`
 
