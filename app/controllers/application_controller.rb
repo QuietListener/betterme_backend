@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, with: :show_error
 
   def  get_user
-    access_token = cookies[:access_token] || "oGCPmw5ajMA33vczHJylSmORcWnQ"
+    access_token = cookies[:access_token]
     if access_token.blank?
       raise Exception.new("没有登录")
     end
@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     @exception = exception
     respond_to do |format|
       format.html {render 'layouts/error'}
-      format.json {render json:{status:FAIL,msg:exception.message},:status => 404}
+      format.json {render json:{status:FAIL,msg:exception.message},:status => 200}
     end
   end
 

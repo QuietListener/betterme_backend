@@ -56,7 +56,10 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
-  get "index/test1"=>"index#test1"
+  post "register"=>"index#register"
+  post "login"=>"index#login"
+
+  get "index"=>"index#index"
   get "home"=>"index#home"
 
   match 'index/create_plan'=> 'application#options_result',via: [:options]

@@ -1,6 +1,9 @@
+#encoding:utf-8
+require("#{Rails.root.to_s}/app/models/common/b_utils.rb")
+
 class IndexController < ApplicationController
 
-  before_filter :add_cors_headers,:get_user
+  before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register]
 
   def index
     logger.info request.inspect
@@ -8,6 +11,35 @@ class IndexController < ApplicationController
 
   def login
 
+    username = params[:username]
+    password = params[:password]
+
+    if(username.blank? || password.blank? )
+      raise Exception.new("用户名或者密码为空")
+    end
+
+    encoded_password = User.encode_passwd(password)
+
+    u=User.where(:name=>username,:password=>encoded_password).first
+
+    if(u.blank?)
+      raise Exception.new("没有这个用户")
+    end
+
+    u.password = nil;
+    cookies[:access_token] = {
+        :value => u.access_token,
+        :expires => 1.year.from_now,
+        :domain => BUtils.domain
+    }
+
+    respond_to do |format|
+      format.json {render :json=>{status:OK,smsg:"ok",data:u}}
+      format.html {
+
+        redirect_to "/home"
+      }
+    end
   end
 
 
@@ -15,12 +47,24 @@ class IndexController < ApplicationController
 
   end
 
+
   def register
     username = params[:username]
-    password = parasm[:password]
+    password = params[:password]
+    code = params[:code]
 
     if(username.blank? || password.blank? )
       raise Exception.new("用户名或者密码为空")
+    end
+
+    ec = EnsureCode.where(:phone => username).order("created_at desc").limit(1).first
+
+    if ec.blank?
+      raise Exception.new("验证码有问题，请重试")
+    end
+
+    if(ec.code != code)
+      raise Exception.new("验证码过期，请重试")
     end
 
     uc=User.where(:name=>username).count
@@ -29,7 +73,28 @@ class IndexController < ApplicationController
       raise Exception.new("用户名已经存在了")
     end
 
+    u = User.new
+    u.name = username
+    u.password = User.encode_passwd(password)
+    u.access_token= "#{u.password}#{rand(1000)}";
+    u.provider= User::PROVIDER_PHONE;
+    u.save!;
 
+    u.password = nil;
+
+    respond_to do |format|
+      format.json {render :json=>{status:OK,smsg:"ok",data:u}}
+      format.html {
+
+        cookies[:access_token] = {
+            :value => u.access_token,
+            :expires => 1.year.from_now,
+            :domain => BUtils.domain
+        }
+
+        redirect_to "/home"
+      }
+    end
   end
 
   def test1
@@ -63,13 +128,12 @@ class IndexController < ApplicationController
         end
       end
 
-
-
-
+      end_time_ = DateTime.parse(end_time).at_end_of_day
+      start_time_ = DateTime.parse(start_time).at_beginning_of_day
       p.user_id = user.id
       p.name = name
-      p.start = start_time
-      p.end = end_time
+      p.start = start_time_
+      p.end = end_time_
       p.save;
 
       respond_to_ok(p,"");

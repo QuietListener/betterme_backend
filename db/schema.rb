@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206150031) do
+ActiveRecord::Schema.define(version: 20180224053748) do
+
+  create_table "cache_configs", force: :cascade do |t|
+    t.string   "key",        limit: 100, null: false
+    t.string   "value",      limit: 512, null: false
+    t.datetime "expired_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cache_configs", ["key"], name: "idx_config_key", unique: true, using: :btree
+
+  create_table "ensure_codes", force: :cascade do |t|
+    t.string   "phone",      limit: 255
+    t.string   "code",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "plan_alerts", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -55,6 +72,8 @@ ActiveRecord::Schema.define(version: 20180206150031) do
     t.string   "province",     limit: 255
     t.string   "city",         limit: 255
     t.string   "user_token",   limit: 255
+    t.string   "name",         limit: 255
+    t.string   "password",     limit: 255
   end
 
 end

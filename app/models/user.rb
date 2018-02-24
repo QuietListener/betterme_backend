@@ -1,5 +1,9 @@
+#encoding:utf-8
+require 'digest/sha1'
+
 class User < ActiveRecord::Base
 
+  PROVIDER_PHONE= 5;
   PROVIDER_WX = 1;
   PROVIDER_QQ = 3;
 
@@ -38,4 +42,9 @@ class User < ActiveRecord::Base
   def gen_access_token(id)
     return id;
   end
+
+  def self.encode_passwd(password)
+    return Digest::SHA1.hexdigest(password)
+  end
+
 end
