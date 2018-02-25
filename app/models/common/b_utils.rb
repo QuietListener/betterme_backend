@@ -75,4 +75,9 @@ class BUtils
     origin_img.destroy!
   end
 
+
+  def self.send_ems(code)
+
+    return true;
+  end
 end

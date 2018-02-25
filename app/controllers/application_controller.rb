@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
 
   def respond_to_ok(data,msg)
     respond_to do |format|
-      format.json {render :json=>{status:OK,smsg:"ok",data:data}}
+      format.json {render :json=>{status:OK,smsg:msg,data:data}}
     end
   end
 

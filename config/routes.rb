@@ -58,6 +58,7 @@ Rails.application.routes.draw do
 
   post "register"=>"index#register"
   post "login"=>"index#login"
+  post "ensure_code"=>"index#ensure_code"
 
   get "index"=>"index#index"
   get "home"=>"index#home"

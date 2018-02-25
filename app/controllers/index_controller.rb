@@ -3,7 +3,7 @@ require("#{Rails.root.to_s}/app/models/common/b_utils.rb")
 
 class IndexController < ApplicationController
 
-  before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register]
+  before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register,:ensure_code]
 
   def index
     logger.info request.inspect
@@ -47,6 +47,37 @@ class IndexController < ApplicationController
 
   end
 
+  def ensure_code
+    username = params[:username]
+    code = params[:code]
+    if(username.blank? )
+      raise Exception.new("手机号为空")
+    end
+
+    ec = EnsureCode.where(:phone => username).order("created_at desc").limit(1).first
+
+    if not ec.blank?
+      updated_at = ec.updated_at
+      now = Time.now
+      span = now - updated_at
+
+      # if(span < 60)
+      #   raise Exception.new("发送得太频繁");
+      # end
+   end
+
+    ec = EnsureCode.new
+    ec.phone=username
+    ec.code = rand(9999)
+    ec.save!
+
+    if(ec.id>0)
+      ret =  BUtils.send_ems(ec.code);
+      respond_to_ok("发送成功","发送成功");
+    end
+
+
+  end
 
   def register
     username = params[:username]

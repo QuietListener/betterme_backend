@@ -26,6 +26,13 @@
   color:red;
 }
 
+.code-btn
+{
+  border:1px solid #CCCCCC;
+  padding:4px;
+  color:white;
+  background-color: #CCCCCC;
+}
 
 </style>
 
@@ -65,7 +72,9 @@
 
 
     <div class="input-row" style="margin-top: 10px">
-      <input id="code" placeholder="验证码" class="sinput" style="width:90px"/> <span style="font-size:12px;padding:4px;border-radius:4px;background-color: #CCCCCC;color:white">获取验证码</span>
+      <input id="code" placeholder="验证码" class="sinput" style="width:90px"/>
+      <input id="code-btn"  class="code-btn" type="button" value="获取验证码"></input>
+
     </div>
 
     <div class="input-row" style="width:80%;text-align: center;margin:auto;margin-top: 10px;">
@@ -75,7 +84,34 @@
 </div>
 
 <script>
+
+
+
+
   $(function(){
+
+      function settime(obj,countdown) {
+          if (countdown == 0) {
+              $(obj).attr("disabled",false);
+              $(obj).val("获取验证码");
+              countdown = 60;
+              return;
+          } else {
+              $(obj).attr("disabled",true);
+              $(obj).val( countdown+"秒后重新发送");
+              countdown--;
+          }
+          setTimeout(function() {
+                  settime(obj,countdown) }
+              ,1000)
+      }
+
+      function invokeSettime(obj){
+          var countdown=60;
+          settime(obj,countdown);
+      }
+
+
       $(".register-btn").on("click",function(){
 
           var data = {
@@ -180,6 +216,63 @@
               }
           })
       });
+
+
+
+      $("#code-btn").on("click",function(){
+
+          var data = {
+              username:$("#phone2").val(),
+              code:$("#code").val()
+          }
+
+          var that = this;
+          $.ajax({
+              url:'ensure_code.json',
+              type:'POST', //GET
+              async:true,    //或false,是否异步
+              data:data,
+              timeout:5000,    //超时时间
+              dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+              beforeSend:function(xhr){
+                  console.log(xhr)
+                  console.log('发送前')
+              },
+              success:function(data,textStatus,jqXHR){
+                  console.log(data)
+                  //错误
+                  if(!data || data.status !=1 )
+                  {
+                      if(data.msg)
+                      {
+                          alert(data.msg);
+                      }
+                      else
+                      {
+                          alert("发生了未知错误");
+                      }
+                  }
+                  else
+                  {
+                     invokeSettime(that);
+
+                  }
+
+                  //成功；
+                  // alert("成功")
+
+              },
+              error:function(data){
+                  alert("发生了错误未知错误");
+              },
+              complete:function(){
+                  console.log('结束')
+              }
+          })
+      });
+
   })
+
+
 </script>
 
