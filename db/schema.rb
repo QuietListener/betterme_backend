@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224053748) do
+ActiveRecord::Schema.define(version: 20180226081507) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20180224053748) do
   create_table "ensure_codes", force: :cascade do |t|
     t.string   "phone",      limit: 255
     t.string   "code",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "status",     limit: 255, default: "0"
   end
 
   create_table "plan_alerts", force: :cascade do |t|

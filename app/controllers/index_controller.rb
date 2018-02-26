@@ -49,9 +49,17 @@ class IndexController < ApplicationController
 
   def ensure_code
     username = params[:username]
-    code = params[:code]
     if(username.blank? )
       raise Exception.new("手机号为空")
+    end
+
+    if not username=~/^1\d+$/ or username.size < 11
+      raise Exception.new("手机号码是不是输错了~")
+    end
+
+    uc = User.where(:name => username.strip).count
+    if(uc > 0)
+      raise Exception.new("用户已经存在")
     end
 
     ec = EnsureCode.where(:phone => username).order("created_at desc").limit(1).first
@@ -61,9 +69,9 @@ class IndexController < ApplicationController
       now = Time.now
       span = now - updated_at
 
-      # if(span < 60)
-      #   raise Exception.new("发送得太频繁");
-      # end
+      if(span < 60)
+        raise Exception.new("发送得太频繁");
+      end
    end
 
     ec = EnsureCode.new
@@ -159,8 +167,8 @@ class IndexController < ApplicationController
         end
       end
 
-      end_time_ = DateTime.parse(end_time).at_end_of_day
-      start_time_ = DateTime.parse(start_time).at_beginning_of_day
+      end_time_ = DateTime.parse(end_time)
+      start_time_ = DateTime.parse(start_time)
       p.user_id = user.id
       p.name = name
       p.start = start_time_

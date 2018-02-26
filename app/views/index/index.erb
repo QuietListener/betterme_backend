@@ -37,6 +37,7 @@
 </style>
 
 <div>
+<div id="login_div">
   <form>
     <div class="input-row">
       <span class="sinput_tip">手机号:</span>
@@ -50,14 +51,16 @@
 
 
     <div class="input-row" style="width:80%;text-align: center;margin:auto;margin-top: 10px;">
-      <div class="submit-btn login-btn" style="margin:auto">注册</div>
+      <div class="submit-btn login-btn" style="margin:auto">登录</div>
+
+      <div id="show-register-btn" class="submit-btn " style="marginTop:10px;margin:auto">还没有账号注册一个吧~</div>
     </div>
 
   </form>
 </div>
 
 
-<div>
+<div id="register_div" style="display: none">
   <form>
     <div class="input-row">
       <span class="sinput_tip">手机号:</span>
@@ -69,8 +72,6 @@
       <input id="password2"  placeholder="密码" class="sinput" />
     </div>
 
-
-
     <div class="input-row" style="margin-top: 10px">
       <input id="code" placeholder="验证码" class="sinput" style="width:90px"/>
       <input id="code-btn"  class="code-btn" type="button" value="获取验证码"></input>
@@ -79,8 +80,12 @@
 
     <div class="input-row" style="width:80%;text-align: center;margin:auto;margin-top: 10px;">
       <div class="submit-btn register-btn" style="margin:auto">注册</div>
+
+      <div id="show-login-btn" class="submit-btn " style="marginTop:10px;margin:auto">返回登录页面~</div>
+
     </div>
   </form>
+</div>
 </div>
 
 <script>
@@ -271,7 +276,34 @@
           })
       });
 
+
+
+     function show_register()
+     {
+         $("#login_div").hide();
+         $("#register_div").show();
+     }
+
+      function show_login()
+      {
+          $("#login_div").show();
+          $("#register_div").hide();
+      }
+
+      $("#show-register-btn").on("click",function(){
+         show_register();
+      });
+
+
+      $("#show-login-btn").on("click",function(){
+          show_login();
+      });
+
+
+
   })
+
+
 
 
 </script>
