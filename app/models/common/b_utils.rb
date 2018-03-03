@@ -4,7 +4,8 @@ require 'fileutils'
 class BUtils
 
   def self.domain
-    "localhost"# "www.coderlong.com"
+    #"localhost"
+    "www.coderlong.com"
   end
 
   def self.time_format(t)
