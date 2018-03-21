@@ -3,7 +3,11 @@ require("#{Rails.root.to_s}/app/models/common/b_utils.rb")
 
 class IndexController < ApplicationController
 
-  before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register,:ensure_code]
+  before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register,:ensure_code],except: [:test1]
+
+  def test
+
+  end
 
   def index
     logger.info request.inspect
@@ -150,6 +154,7 @@ class IndexController < ApplicationController
       name = params[:name].strip
       start_time = params[:start_time]
       end_time = params[:end_time]
+      days = params[:days]
 
       user = @user
 
