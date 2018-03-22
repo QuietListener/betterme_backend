@@ -3,6 +3,12 @@ require 'fileutils'
 
 class BUtils
 
+  def self.token
+      key = "#{DateTime.now().to_i}#{rand(1000000)+2000}"
+      ret = Digest::SHA1.hexdigest(key)
+      return ret;
+  end
+
   def self.domain
     #"localhost"
     "www.coderlong.com"

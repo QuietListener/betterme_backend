@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
 
     @user = User.where(:access_token => access_token).first
 
+    if @user
+      @user.password=nil;
+    end
+
     if access_token.blank?
       raise Exception.new("登录过期")
     end

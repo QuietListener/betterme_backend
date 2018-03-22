@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
   PROVIDER_WX = 1;
   PROVIDER_QQ = 3;
 
+  DakaTodayError = -1
+  DakaTodayAllFinished = 0
+  DakaTodayNoneFinished = 1
+  DakaTodayPartFinished = 2
+
   def my_status
       r_count = PlanRecord.where("user_id = ?", self.id).count
       if(r_count <= 3)
@@ -47,4 +52,26 @@ class User < ActiveRecord::Base
     return Digest::SHA1.hexdigest(password)
   end
 
+  def plan_status
+     now = DateTime.now
+     plans = Plan.where("user_id = ? and start < ? and end > ?", self.id, now, now)
+     return DakaTodayError if(plans.length == 0)
+
+     statuses = plans.map {|p| p.finished_daka_today() ? 1 : 0 }
+     sum = statuses.sum
+
+    if(sum == 0)
+      return DakaTodayNoneFinished
+    elsif(sum < statuses.length)
+      return DakaTodayPartFinished
+    else
+      return DakaTodayAllFinished
+    end
+
+  end
+
+
+  def reward
+    UserReward.where("created_at > ?",DateTime.now).last
+  end
 end

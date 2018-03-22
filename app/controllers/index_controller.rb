@@ -1,5 +1,6 @@
 #encoding:utf-8
 require("#{Rails.root.to_s}/app/models/common/b_utils.rb")
+require 'digest/sha1'
 
 class IndexController < ApplicationController
 
@@ -145,7 +146,14 @@ class IndexController < ApplicationController
   end
 
   def user
-    respond_to_ok(@user,"");
+
+    user = @user.as_json
+    r = @user.reward
+    if r and r.token and r.state == UserReward::StateInit
+        user["luck_token"] = r.token
+    end
+
+    respond_to_ok(user,"");
   end
 
   def create_plan
@@ -273,6 +281,24 @@ class IndexController < ApplicationController
     pr.save
 
     prs = PlanRecord.where("plan_id = ?",plan.id)
+    status = @user.plan_status
+
+    if(status == User::DakaTodayAllFinished)
+
+        ur = UserReward.last;
+        if(not ur or  ur.created_at < DateTime.now.beginning_of_day)
+
+            ur = UserReward.new
+            ur.user_id = @user.id
+            ur.reward_type=0
+            ur.token=BUtils.token()
+            ur.state= UserReward::StateInit
+            ur.content=rand(20)+30
+            ur.save!
+
+        end
+    end
+
     respond_to_ok(prs,"")
   end
 
