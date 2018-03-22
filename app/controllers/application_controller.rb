@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_cors_headers
-    headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
+    headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Credentials'] = 'true'
