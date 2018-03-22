@@ -67,11 +67,16 @@ class User < ActiveRecord::Base
     else
       return DakaTodayAllFinished
     end
-
   end
-
 
   def reward
     UserReward.where("created_at > ?",DateTime.now.beginning_of_day).last
   end
+
+  def statistics
+    total_score = UserReward.where("user_id = ? and state = ?",self.id,UserReward::StateDone).pluck(:content).sum
+    daka_count = PlanRecord.where("user_id = ? ",self.id).count
+    return {total_score:total_score,daka_count:daka_count}
+  end
+
 end

@@ -155,6 +155,7 @@ class IndexController < ApplicationController
       user["lucky_token"] = nil;
     end
 
+    user["statistics"] = @user.statistics()
     respond_to_ok(user,"");
   end
 
