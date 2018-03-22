@@ -4,7 +4,7 @@ require 'digest/sha1'
 
 class IndexController < ApplicationController
 
-  before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register,:ensure_code],except: [:test1]
+  before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register,:ensure_code,:test1]
 
   def test
 
