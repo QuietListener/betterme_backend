@@ -72,6 +72,6 @@ class User < ActiveRecord::Base
 
 
   def reward
-    UserReward.where("created_at > ?",DateTime.now).last
+    UserReward.where("created_at > ?",DateTime.now.beginning_of_day).last
   end
 end

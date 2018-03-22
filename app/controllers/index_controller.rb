@@ -150,7 +150,9 @@ class IndexController < ApplicationController
     user = @user.as_json
     r = @user.reward
     if r and r.token and r.state == UserReward::StateInit
-        user["luck_token"] = r.token
+        user["lucky_token"] = r.token
+    else
+      user["lucky_token"] = nil;
     end
 
     respond_to_ok(user,"");
@@ -308,6 +310,22 @@ class IndexController < ApplicationController
     prs = PlanRecord.where("plan_id = ?",plan.id).order("created_at desc");
 
     respond_to_ok(prs,"")
+  end
+
+
+  def get_reward
+    token = params[:lucky_token]
+    ur = UserReward.where("user_id = ? and token = ? and state = ?",@user.id, token,UserReward::StateInit).last
+
+    msg = "ok"
+    if  not ur
+      msg = "没有可以领取的红包"
+    else
+      ur.state = UserReward::StateDone
+      ur.save!
+    end
+
+    respond_to_ok(ur,msg);
   end
 
 end
