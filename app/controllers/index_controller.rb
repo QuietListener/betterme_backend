@@ -189,35 +189,43 @@ class IndexController < ApplicationController
       start_time_ = DateTime.parse(start_time)
       p.user_id = user.id
       p.name = name
-      p.start = start_time_
-      p.end = end_time_
 
-      if p.id.blank? #新计划 需要扣分
-        day_span = (end_time_-start_time_).round #天数
-        if(day_span<=0)
-          raise Exception.new("计划结束时间应该比开始时间晚~");
-        end
+      if p.id.blank?
+        p.start = start_time_
+        p.end = end_time_
+      end
 
-        used_scores = day_span * UsedScorePerDay
+      day_span = (end_time_-start_time_).round #天数
+      if(day_span<=0)
+        raise Exception.new("计划结束时间应该比开始时间晚~");
+      end
 
-        statistics = @user.statistics
-        total_score = statistics[:total_score];
-        if used_scores > total_score
-            raise Exception.new("创建计划需要#{used_scores}(#{used_scores}=#{day_span} x #{UsedScorePerDay})分，但是你的账户只有#{total_score}分")
-        end
+      #需要的分数
+      used_scores = day_span * UsedScorePerDay
+      statistics = @user.statistics
+      total_score = statistics[:total_score];
 
+      if p.id.blank?
         ur = UserReward.new
-        ur.user_id=@user.id
-        ur.content= used_scores
-        ur.reward_type=UserReward::TypeCreatePlan
-        ur.state = UserReward::StateDone
+        if used_scores > total_score
+          raise Exception.new("创建计划需要#{used_scores}(#{used_scores}=#{day_span} x #{UsedScorePerDay})分，但是你的账户只有#{total_score}分")
+        end
+
+        if ur
+          ur.user_id=@user.id
+          ur.content= used_scores
+          ur.reward_type=UserReward::TypeCreatePlan
+          ur.state = UserReward::StateDone
+        end
 
       end
 
       @user.transaction do
         p.save!;
-        ur.token = p.id
-        ur.save!
+        if ur
+          ur.token = p.id
+          ur.save!
+        end
       end
 
       respond_to_ok(p,"");
@@ -258,7 +266,7 @@ class IndexController < ApplicationController
       plan_id = plan.id
       finished_days = PlanRecord.where("plan_id = ?",plan_id)
       finished_days_count = PlanRecord.where("plan_id = ?",plan_id).count
-      total_days_count = (plan.end - plan.start).to_i/86400
+      total_days_count = (plan.end.to_date - plan.start.to_date).to_i+1
 
       return total_days_count,finished_days_count,finished_days
   end
