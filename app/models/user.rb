@@ -60,12 +60,13 @@ class User < ActiveRecord::Base
      statuses = plans.map {|p| p.finished_daka_today() ? 1 : 0 }
      sum = statuses.sum
 
+     cur_plan_count = plans.length;
     if(sum == 0)
-      return DakaTodayNoneFinished
+      return DakaTodayNoneFinished,cur_plan_count
     elsif(sum < statuses.length)
-      return DakaTodayPartFinished
+      return DakaTodayPartFinished,cur_plan_count
     else
-      return DakaTodayAllFinished
+      return DakaTodayAllFinished,cur_plan_count
     end
   end
 
@@ -74,8 +75,16 @@ class User < ActiveRecord::Base
   end
 
   def statistics
-    total_score = UserReward.where("user_id = ? and state = ?",self.id,UserReward::StateDone).pluck(:content).sum
+    reward_score = UserReward.where("user_id = ? and state = ? and reward_type = ?",self.id,UserReward::StateDone,UserReward::TypeDayTaskFinishedReward).pluck(:content).sum
+    used_score = UserReward.where("user_id = ? and state = ? and reward_type = ?",self.id,UserReward::StateDone,UserReward::TypeCreatePlan).pluck(:content).sum
+
+
+    #当前总积分
+    total_score = reward_score - used_score
+
+    #打卡次数
     daka_count = PlanRecord.where("user_id = ? ",self.id).count
+
     return {total_score:total_score,daka_count:daka_count}
   end
 

@@ -2,6 +2,8 @@
 require("#{Rails.root.to_s}/app/models/common/b_utils.rb")
 require 'digest/sha1'
 
+UsedScorePerDay = 50;
+
 class IndexController < ApplicationController
 
   before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register,:ensure_code,:test1]
@@ -171,12 +173,12 @@ class IndexController < ApplicationController
 
       p = Plan.where("name=? and user_id = ?",name,user.id);
       if(p ！= nil)
-        raise Exception("已经有一个重名的plan了")
+        raise Exception("已经有一个重名的计划了")
       end
 
 
       p = Plan.new
-      if not id.blank? and id.to_i >= 0
+      if not id.blank? and id.to_i >= 0 #更新plan
         p = Plan.where(:id=>id).first;
         if p.blank?
           raise Exception.new("没有id为#{id}的计划")
@@ -189,7 +191,34 @@ class IndexController < ApplicationController
       p.name = name
       p.start = start_time_
       p.end = end_time_
-      p.save;
+
+      if p.id.blank? #新计划 需要扣分
+        day_span = (end_time_-start_time_).round #天数
+        if(day_span<=0)
+          raise Exception.new("计划结束时间应该比开始时间晚~");
+        end
+
+        used_scores = day_span * UsedScorePerDay
+
+        statistics = @user.statistics
+        total_score = statistics[:total_score];
+        if used_scores > total_score
+            raise Exception.new("创建计划需要#{used_scores}(#{used_scores}=#{day_span} x #{UsedScorePerDay})分，但是你的账户只有#{total_score}分")
+        end
+
+        ur = UserReward.new
+        ur.user_id=@user.id
+        ur.content= used_scores
+        ur.reward_type=UserReward::TypeCreatePlan
+        ur.state = UserReward::StateDone
+
+      end
+
+      @user.transaction do
+        p.save!;
+        ur.token = p.id
+        ur.save!
+      end
 
       respond_to_ok(p,"");
   end
@@ -276,19 +305,27 @@ class IndexController < ApplicationController
     #   raise Exception.new("还没有开始呢~")
     # end
 
-
     pr.user_id=plan.user_id
     pr.plan_id = plan.id
     pr.desc = params[:desc].strip
     pr.images = JSON.dump(params[:images]);
     pr.save
 
+    ur = UserReward.new
+    ur.reward_type=UserReward::TypeDakaReward
+    ur.user_id=@user.id
+    ur.state = UserReward::StateDone
+    ur.content = 60
+    ur.token = pr.id
+
+    ur.save!
+
     prs = PlanRecord.where("plan_id = ?",plan.id)
-    status = @user.plan_status
+    status,plan_count = @user.plan_status
 
     if(status == User::DakaTodayAllFinished)
 
-        ur = UserReward.last;
+        ur = UserReward.where("user_id=? and reward_type = ? ",@user.id, UserReward::TypeDayTaskFinishedReward).last;
         if(not ur or  ur.created_at < DateTime.now.beginning_of_day)
 
             ur = UserReward.new
@@ -296,13 +333,13 @@ class IndexController < ApplicationController
             ur.reward_type=0
             ur.token=BUtils.token()
             ur.state= UserReward::StateInit
-            ur.content=rand(20)+30
+            ur.content=rand(25) + 45 * plan_count
             ur.save!
 
         end
     end
 
-    respond_to_ok(prs,"")
+    respond_to_ok({prs:prs,reward:ur},"")
   end
 
   def plan_records
