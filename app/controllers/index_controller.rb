@@ -341,7 +341,7 @@ class IndexController < ApplicationController
             ur.reward_type=0
             ur.token=BUtils.token()
             ur.state= UserReward::StateInit
-            ur.content=rand(25) + 45 * plan_count
+            ur.content=rand(20) + 10 * plan_count
             ur.save!
 
         end
