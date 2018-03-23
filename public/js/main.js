@@ -714,8 +714,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DayMinSeconds = exports.DayMinSeconds = 24 * 60 * 60 * 1000;
 var slogon = exports.slogon = "做更好的自己";
-var BaseHost = exports.BaseHost = "http://localhost:3000";
-//export const BaseHost = `http://www.coderlong.com`
+//export const BaseHost = "http://localhost:3000"
+var BaseHost = exports.BaseHost = "http://www.coderlong.com";
 var IMG_BASE = exports.IMG_BASE = BaseHost + "/upload/";
 
 var history = _reactRouter.hashHistory;
