@@ -328,6 +328,7 @@ class IndexController < ApplicationController
 
     ur1.save!
 
+    
     prs = PlanRecord.where("plan_id = ?",plan.id)
     status,plan_count = @user.plan_status
 
