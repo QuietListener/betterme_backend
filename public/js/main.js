@@ -714,8 +714,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DayMinSeconds = exports.DayMinSeconds = 24 * 60 * 60 * 1000;
 var slogon = exports.slogon = "做更好的自己";
-//export const BaseHost = "http://localhost:3000"
-var BaseHost = exports.BaseHost = "http://www.coderlong.com";
+var BaseHost = exports.BaseHost = "http://localhost:3000";
+//export const BaseHost = `http://www.coderlong.com`
 var IMG_BASE = exports.IMG_BASE = BaseHost + "/upload/";
 
 var history = _reactRouter.hashHistory;
@@ -2995,7 +2995,7 @@ var CLoading = _wrapComponent("CLoading")(function (_Component) {
 
       return _react3.default.createElement(
         "div",
-        { style: { width: "100%", height: "200%", textAlign: "center", position: "absolute", zIndex: 1024, backgroundColor: "rgba(0,0,0,0.1)" } },
+        { style: { width: "100%", height: "200%", textAlign: "center", position: "absolute", zIndex: 999, backgroundColor: "rgba(0,0,0,0.1)" } },
         _react3.default.createElement(
           "div",
           { style: { textAlign: "center", marginTop: "200px", color: "white", fontSize: 16 } },
@@ -10527,14 +10527,14 @@ var CDaka = _wrapComponent('CDaka')(function (_Component) {
         null,
         this.state.reward ? _react3.default.createElement(
           _c_toast2.default,
-          { hide: this.reset_reward },
+          { timeout: 1500, hide: this.reset_reward },
           _react3.default.createElement(
             'p',
-            { style: { color: "white" } },
+            { style: { color: "white", fontSize: "20px" } },
             '\u606D\u559C\u83B7\u5F97',
             _react3.default.createElement(
               'span',
-              { style: { fontSize: 20, color: "white" } },
+              { style: _defineProperty({ margin: 6, fontSize: 30, color: "white" }, 'color', base.COLOR.red) },
               this.state.reward
             ),
             '\u79EF\u5206'
@@ -10555,8 +10555,10 @@ var styles = {
 
   daka_box: (_daka_box = { padding: "8px",
     width: "100%", height: "40px",
+    borderWidth: 1,
+    borderColor: base.COLOR.gray,
     fontWeight: "bold"
-  }, _defineProperty(_daka_box, 'padding', "10px"), _defineProperty(_daka_box, 'marginBottom', ""), _defineProperty(_daka_box, 'color', "white"), _defineProperty(_daka_box, 'textAlign', "center"), _defineProperty(_daka_box, 'borderRadius', 4), _defineProperty(_daka_box, 'marginTop', 10), _daka_box),
+  }, _defineProperty(_daka_box, 'padding', "10px"), _defineProperty(_daka_box, 'color', "white"), _defineProperty(_daka_box, 'textAlign', "center"), _defineProperty(_daka_box, 'borderRadius', 4), _defineProperty(_daka_box, 'marginTop', 10), _daka_box),
 
   icon: {
     fontSize: "18px",
@@ -17379,7 +17381,14 @@ var CReward = _wrapComponent('CReward')(function (_Component) {
         msg = this.state.score;
       }
 
-      var tip = "您获得一次抽奖机会";
+      var tip = _react3.default.createElement(
+        'p',
+        null,
+        '\u60A8\u5B8C\u6210\u4E86\u4ECA\u5929\u6240\u6709\u6253\u5361',
+        _react3.default.createElement('br', null),
+        '\u83B7\u5F97\u4E00\u4E2A\u6B21\u62BD\u5956\u673A\u4F1A'
+      );
+
       if (this.state.step == 2 && this.state.score > 0) {
         tip = "哇喔，您获得了~";
       }
@@ -17392,10 +17401,10 @@ var CReward = _wrapComponent('CReward')(function (_Component) {
           { style: { position: "relative", textAlign: "center", marginTop: "40%" } },
           _react3.default.createElement(
             'div',
-            { style: _defineProperty({ position: "relative", display: "inline-block", width: "200px", height: "250px", backgroundColor: "white", borderRadius: "4px", textAlign: "center", verticalAlign: "middle" }, 'backgroundColor', base.COLOR.gray) },
+            { style: _defineProperty({ position: "relative", display: "inline-block", width: "240px", height: "290px", backgroundColor: "white", borderRadius: "4px", textAlign: "center", verticalAlign: "middle" }, 'backgroundColor', base.COLOR.gray) },
             _react3.default.createElement(
               'span',
-              { style: { display: "inline-block", position: "absolute", top: 4, right: 6, color: "black", fontSize: 16 },
+              { style: { display: "inline-block", position: "absolute", top: 4, right: 12, color: "black", fontSize: 30 },
                 onClick: this.hide },
               'x'
             ),
@@ -17406,7 +17415,7 @@ var CReward = _wrapComponent('CReward')(function (_Component) {
             ),
             _react3.default.createElement(
               'div',
-              { style: { margin: "auto", backgroundColor: base.COLOR.red, width: 120, height: 120, borderRadius: 60, verticalAlign: "middle", fontSize: 30, marginTop: 25, paddingTop: 35 },
+              { style: { margin: "auto", backgroundColor: base.COLOR.red, width: 120, height: 120, borderRadius: 60, verticalAlign: "middle", fontSize: 30, marginTop: 20, paddingTop: 40 },
                 onClick: this.get_reward
               },
               msg
@@ -32670,8 +32679,14 @@ var Home = _wrapComponent('Home')(function (_Component) {
           { style: { marginTop: "4px", marginBottom: "20px" } },
           _react3.default.createElement(_c_progress2.default, { percent: 0.5 })
         ),
-        _react3.default.createElement(_c_daka2.default, { plan: item_,
-          daka_success: this.componentDidMount,
+        _react3.default.createElement(_c_daka2.default, { key: item_.id,
+          plan: item_,
+          daka_success: function daka_success() {
+            _this4.load_plans(_this4.state.user.id);
+            setTimeout(function () {
+              return _this4.load();
+            }, 1500);
+          },
           daka_start: function daka_start() {
             return _this4.daka_start();
           },
@@ -32690,7 +32705,7 @@ var Home = _wrapComponent('Home')(function (_Component) {
       if (this.state.loading == false) loading_view = true;
 
       var user = this.state.user;
-      if (user == null || this.state.loading == true) return loading_view;
+      if (user == null) return loading_view;
 
       var plans = this.state.plans;
       var new_plan = null;
@@ -47425,8 +47440,8 @@ var NewPlan = _wrapComponent('NewPlan')(function (_Component) {
       var _this3 = this;
 
       var plan_name = this.state.plan_name;
-      var start = this.state.start;
-      var end = this.state.end;
+      var start = base.formatDate1(this.state.start);
+      var end = base.formatDate1(this.state.end);
       var new_plan = { plan_name: plan_name, start: start, end: end };
 
       var that = this;
@@ -47593,6 +47608,9 @@ var NewPlan = _wrapComponent('NewPlan')(function (_Component) {
                 return base.formatDate1(date);
               },
               onChange: function onChange(event, newValue) {
+
+                console.log("start123", base.formatDate1(_this5.state.start));
+
                 console.log('start:end=' + _this5.state.start + ' newValue', newValue);
                 var ret = _this5.check_date(newValue, _this5.state.end, _this5.state.MAX_DAYS);
                 _this5.caculate_need_score(newValue, _this5.state.end);
