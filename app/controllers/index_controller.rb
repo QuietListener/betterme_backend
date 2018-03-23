@@ -319,14 +319,14 @@ class IndexController < ApplicationController
     pr.images = JSON.dump(params[:images]);
     pr.save
 
-    ur = UserReward.new
-    ur.reward_type=UserReward::TypeDakaReward
-    ur.user_id=@user.id
-    ur.state = UserReward::StateDone
-    ur.content = 60
-    ur.token = pr.id
+    ur1 = UserReward.new
+    ur1.reward_type=UserReward::TypeDakaReward
+    ur1.user_id=@user.id
+    ur1.state = UserReward::StateDone
+    ur1.content = rand(20)+50
+    ur1.token = pr.id
 
-    ur.save!
+    ur1.save!
 
     prs = PlanRecord.where("plan_id = ?",plan.id)
     status,plan_count = @user.plan_status
@@ -347,7 +347,7 @@ class IndexController < ApplicationController
         end
     end
 
-    respond_to_ok({prs:prs,reward:ur},"")
+    respond_to_ok({prs:prs,reward:ur1},"")
   end
 
   def plan_records
