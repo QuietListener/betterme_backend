@@ -11,4 +11,8 @@ class Plan < ActiveRecord::Base
      return str1 == str2;
   end
 
+
+  def total_days
+    return (self.end.to_date-self.start.to_date).to_i+1
+  end
 end

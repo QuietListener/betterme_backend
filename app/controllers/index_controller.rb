@@ -185,8 +185,8 @@ class IndexController < ApplicationController
         end
       end
 
-      end_time_ = DateTime.parse(end_time)
-      start_time_ = DateTime.parse(start_time)
+      end_time_ = Date.parse(end_time)
+      start_time_ = Date.parse(start_time)
       p.user_id = user.id
       p.name = name
 
@@ -195,7 +195,7 @@ class IndexController < ApplicationController
         p.end = end_time_
       end
 
-      day_span = (end_time_-start_time_).round #天数
+      day_span = p.total_days #天数
       if(day_span<=0)
         raise Exception.new("计划结束时间应该比开始时间晚~");
       end
@@ -266,7 +266,7 @@ class IndexController < ApplicationController
       plan_id = plan.id
       finished_days = PlanRecord.where("plan_id = ?",plan_id)
       finished_days_count = PlanRecord.where("plan_id = ?",plan_id).count
-      total_days_count = (plan.end.to_date - plan.start.to_date).to_i+1
+      total_days_count = plan.total_days
 
       return total_days_count,finished_days_count,finished_days
   end
@@ -328,7 +328,7 @@ class IndexController < ApplicationController
 
     ur1.save!
 
-    
+
     prs = PlanRecord.where("plan_id = ?",plan.id)
     status,plan_count = @user.plan_status
 

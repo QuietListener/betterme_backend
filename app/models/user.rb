@@ -75,9 +75,9 @@ class User < ActiveRecord::Base
   end
 
   def statistics
-    reward_score = UserReward.where("user_id = ? and state = ? and reward_type = ?",self.id,UserReward::StateDone,UserReward::TypeDayTaskFinishedReward).pluck(:content).sum
-    used_score = UserReward.where("user_id = ? and state = ? and reward_type = ?",self.id,UserReward::StateDone,UserReward::TypeCreatePlan).pluck(:content).sum
+    reward_score = UserReward.where("user_id = ? and state = ? and reward_type in (#{[UserReward::TypeDayTaskFinishedReward,UserReward::TypeInitReward,UserReward::TypeDakaReward].join(',')})",self.id,UserReward::StateDone).pluck(:content).sum
 
+    used_score = UserReward.where("user_id = ? and state = ? and reward_type = ?",self.id,UserReward::StateDone,UserReward::TypeCreatePlan).pluck(:content).sum
 
     #当前总积分
     total_score = reward_score - used_score
