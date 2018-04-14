@@ -1,6 +1,7 @@
 #encoding:utf-8
 require("#{Rails.root.to_s}/app/models/common/b_utils.rb")
 require 'digest/sha1'
+require("#{Rails.root.to_s}/app/models/learn_word.rb")
 
 UsedScorePerDay = 50;
 InitScore = 2100;
@@ -13,12 +14,15 @@ class DictController < ApplicationController
   def search_word
     word = params[:word]
 
-    respond_to_ok({
-        word: { word:"custom",
-                accent:"['kʌstəm]",
-                mean_cn:"n. 习惯，惯例；风俗；海关，关税；经常光顾；[总称]（经常性的）顾客; adj. （衣服等）定做的，定制的"
-            },
-        recomend:[]},"ok")
+    @word = LearnWord.where(:word=>word).first
+
+    if @word
+      ret = { word: { word:@word.word, accent:@word.accent,  mean_cn:@word.mean_cn}, recomend:[]}
+    else
+      ret = nil
+    end
+
+    respond_to_ok(ret ,"ok")
   end
 
 

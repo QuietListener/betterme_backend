@@ -52,3 +52,11 @@ production:
   database: betterme
   username: betterme
   password: <%= ENV['BETTERME_DATABASE_PASSWORD'] %>
+
+ctx:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: true
+  database: ctx
+  username: root
+  password:

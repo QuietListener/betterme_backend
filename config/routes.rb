@@ -87,4 +87,5 @@ Rails.application.routes.draw do
   post  "dict/createOrUpdate"=>"dict#createOrUpdate"
   get   "api/search_word" =>"dict#search_word"
   get   "api/videos" => "dict#api_videos"
+
 end
