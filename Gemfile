@@ -64,3 +64,5 @@ gem "mini_magick",'4.3.5'
 gem 'spreadsheet'
 gem 'ruby-ole'
 gem 'rest-client'
+
+gem 'will_paginate', '~> 3.1.0'

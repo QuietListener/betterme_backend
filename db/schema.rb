@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322041106) do
+ActiveRecord::Schema.define(version: 20180414072248) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -85,6 +85,22 @@ ActiveRecord::Schema.define(version: 20180322041106) do
     t.string   "user_token",   limit: 255
     t.string   "name",         limit: 255
     t.string   "password",     limit: 255
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string   "title",           limit: 255
+    t.string   "title_cn",        limit: 255
+    t.string   "author",          limit: 255
+    t.string   "author_cn",       limit: 255
+    t.string   "desc",            limit: 255
+    t.string   "desc_cn",         limit: 255
+    t.string   "video_url",       limit: 255
+    t.string   "srt_url",         limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "poster",          limit: 255
+    t.string   "video_file_name", limit: 255
+    t.string   "srt_file_name",   limit: 255
   end
 
 end

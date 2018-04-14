@@ -1,0 +1,52 @@
+
+<%= javascript_include_tag 'jquery.min' %>
+
+<style>
+  .content_textarea
+  {
+    border:1px solid black;
+    margin:8px
+  }
+
+  .submit{
+    margin:8px;
+    font-size: 20px;
+
+  }
+</style>
+
+<div>
+
+  <div>
+    <a href="/dict/videos">返回列表</a>
+  </div>
+
+  <form action="/dict/createOrUpdate" method="post">
+    <input style="display:none" name="id" value="<%=@video.id if @video%>">
+
+    <%["title","poster","srt_url","video_url","srt_file_name","video_file_name"].each do |name|%>
+
+      <div>
+        <div style="width:20%;display:inline-block;vertical-align: top"><span><%=name%></span></div>
+        <div style="width:75%;display:inline-block;vertical-align: top">
+        <textarea cols=80 class="content_textarea" placeholder="<%=name%>" name="<%=name%>" value="<%=@video[name] if @video%>"><%=@video[name] if @video%></textarea>
+          </div>
+      </div>
+
+    <%end%>
+
+
+    <!--<div>-->
+      <!--<%if @video and @video.video_url%>-->
+          <!--<video src="<%=@video.video_url%>"></video>-->
+      <!--<%end%>-->
+    <!--</div>-->
+
+    <div  style="text-align: right;margin-right: 40px">
+      <input type="submit" class="submit" value="确定" >
+    </div>
+  </form>
+
+</div>
+
+

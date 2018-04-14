@@ -79,6 +79,12 @@ Rails.application.routes.draw do
 
   get   "weixin/wein_login_call_back_snsapi_base"=>"weixin#wein_login_call_back_snsapi_base"
   get   "weixin/get_share_config"=>"weixin#get_share_config"
+  get    "index/test1"=>"index#test1"
 
-  get    "index/test1"=>"index/test1"
+
+  get   "dict/videos" =>"dict#videos"
+  get   "dict/video" =>"dict#video"
+  post  "dict/createOrUpdate"=>"dict#createOrUpdate"
+  get   "api/search_word" =>"dict#search_word"
+  get   "api/videos" => "dict#api_videos"
 end

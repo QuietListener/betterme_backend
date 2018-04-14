@@ -3,10 +3,11 @@ require("#{Rails.root.to_s}/app/models/common/b_utils.rb")
 require 'digest/sha1'
 
 UsedScorePerDay = 50;
+InitScore = 2100;
 
 class IndexController < ApplicationController
 
-  before_filter :add_cors_headers,:get_user,:except => [:index,:login,:register,:ensure_code,:test1]
+  before_filter :add_cors_headers,:get_user,:except => [:search_word,:index,:login,:register,:ensure_code,:test1]
 
   def test
 
@@ -119,12 +120,25 @@ class IndexController < ApplicationController
       raise Exception.new("用户名已经存在了")
     end
 
-    u = User.new
-    u.name = username
-    u.password = User.encode_passwd(password)
-    u.access_token= "#{u.password}#{rand(1000)}";
-    u.provider= User::PROVIDER_PHONE;
-    u.save!;
+    User.transaction do
+
+      #新用户
+      u = User.new
+      u.name = username
+      u.password = User.encode_passwd(password)
+      u.access_token= "#{u.password}#{rand(1000)}";
+      u.provider= User::PROVIDER_PHONE;
+      u.save!;
+
+      #新用户奖励的score
+      ur = UserReward.new
+      ur.user_id = u.id
+      ur.reward_type=UserReward::TypeInitReward
+      ur.content = InitScore
+      ur.token = u.id
+      ur.state = UserReward::StateDone
+      ur.save!
+   end
 
     u.password = nil;
 
@@ -220,12 +234,22 @@ class IndexController < ApplicationController
 
       end
 
+
+
       @user.transaction do
         p.save!;
         if ur
           ur.token = p.id
           ur.save!
         end
+
+        hours = params[:hours]
+        minutes = params[:minutes]
+
+        if p.id
+          pa = create_or_update_alert_(@user.id,p.id,hours,minutes)
+        end
+
       end
 
       respond_to_ok(p,"");
@@ -279,6 +303,10 @@ class IndexController < ApplicationController
     p_["total_days_count"] = total_days_count
     p_["finished_days_count"] = finished_days_count
     p_["finished_days"] = finished_days
+
+
+    pa = PlanAlert.where("user_id = ? and plan_id = ?",@user.id, p.id).first
+    p_["alert"]=pa.as_json;
 
     return p_
   end
@@ -373,6 +401,18 @@ class IndexController < ApplicationController
     end
 
     respond_to_ok(ur,msg);
+  end
+
+
+  def search_word
+    word = params[:word]
+
+    respond_to_ok({
+        word: { word:"custom",
+                accent:"['kʌstəm]",
+                mean_cn:"n. 习惯，惯例；风俗；海关，关税；经常光顾；[总称]（经常性的）顾客; adj. （衣服等）定做的，定制的"
+            },
+        recomend:[]},"ok")
   end
 
 end
