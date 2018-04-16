@@ -16,8 +16,20 @@ class DictController < ApplicationController
 
     @word = LearnWord.where(:word=>word).first
 
+    saved = false
+    logined = false;
     if @word
-      ret = { word: {id:@word.id,word:@word.word, accent:@word.accent,  mean_cn:@word.mean_cn}, recomend:[]}
+      access_token = cookies[:access_token]
+      if access_token
+        @user = User.where(:access_token => access_token).first
+        @user.password=nil if @user
+        if @user
+          saved = UserLearnWord.where(:user_id => @user.id,:learn_word_id => @word.id).count > 0
+          logined = @user ? true : false
+        end
+      end
+
+      ret = { word: {id:@word.id,word:@word.word, accent:@word.accent, mean_cn:@word.mean_cn,saved:saved,logined:logined}, recomend:[]}
     else
       ret = nil
     end
