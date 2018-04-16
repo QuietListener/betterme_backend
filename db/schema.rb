@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414072248) do
+ActiveRecord::Schema.define(version: 20180416035328) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20180414072248) do
     t.datetime "updated_at",             null: false
     t.integer  "user_id",    limit: 4,   null: false
   end
+
+  create_table "user_learn_words", force: :cascade do |t|
+    t.integer  "user_id",       limit: 4,               null: false
+    t.integer  "learn_word_id", limit: 4,               null: false
+    t.integer  "status",        limit: 4,   default: 0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "video_id",      limit: 4
+    t.string   "subtitle",      limit: 255
+  end
+
+  add_index "user_learn_words", ["user_id", "learn_word_id"], name: "index_user_learn_words_on_user_id_and_learn_word_id", unique: true, using: :btree
 
   create_table "user_rewards", force: :cascade do |t|
     t.integer  "user_id",     limit: 4

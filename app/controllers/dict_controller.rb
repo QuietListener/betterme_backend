@@ -7,9 +7,9 @@ UsedScorePerDay = 50;
 InitScore = 2100;
 
 class DictController < ApplicationController
-  #
-  # before_filter :add_cors_headers,:get_user,
-  #               :except => [:search_word,:index,:login,:videos,:register,:ensure_code,:test1,:video,:createOrUpdate]
+
+  before_filter :add_cors_headers,:get_user,
+                :except => [:search_word,:index,:login,:videos,:register,:ensure_code,:test1,:video,:createOrUpdate]
 
   def search_word
     word = params[:word]
@@ -60,5 +60,46 @@ class DictController < ApplicationController
     @videos_ = Video.paginate(:page => params[:page], :per_page => 10)
     respond_to_ok(@videos_,"ok")
   end
+
+
+  def save_word
+    id = params[:id]
+    word = LearnWord.where(:id=>id)
+
+    if not word
+      raise Exception.new("没有这个单词")
+    end
+
+    @user
+    ulw = UserLearnWord.where(:user_id => @user.id,:learn_word_id => word.id).first
+
+    if ulw
+      raise Exception.new("已经收藏过了喔~")
+    end
+
+    ulW = UserLearnWord.new
+    ulw.user_id=@user.id
+    ulw.learn_word_id=word.id
+    ulw.status=UserLearnWord::StateOk
+
+    ulw.video_id=params[:video_id]
+    ulw.subtitle=params[:subtitle]
+
+    ulw.save!
+
+    respond_to_ok({},'收藏成功');
+  end
+
+
+  def my_words
+    learn_word = UserLearnWord.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 10)
+    learn_word_ok = learn_word.map do |item|
+      item.as_json(:include=>:learn_word)
+    end
+
+    respond_to_ok(learn_word_ok,"ok");
+  end
+
 end
+
 
