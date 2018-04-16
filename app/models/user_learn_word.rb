@@ -7,12 +7,12 @@ class UserLearnWord < ActiveRecord::Base
   end
 
   def video
-    video = Video.new
+    video1 = Video.new
     if self.video_id
-      video = Video.where(:id=>self.video_id).first
+      video1 = Video.where(:id=>self.video_id).first
     end
 
-    return video
+    return video1
   end
 
 end
