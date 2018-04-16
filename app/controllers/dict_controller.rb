@@ -17,7 +17,7 @@ class DictController < ApplicationController
     @word = LearnWord.where(:word=>word).first
 
     if @word
-      ret = { word: { word:@word.word, accent:@word.accent,  mean_cn:@word.mean_cn}, recomend:[]}
+      ret = { word: {id:@word.id,word:@word.word, accent:@word.accent,  mean_cn:@word.mean_cn}, recomend:[]}
     else
       ret = nil
     end
@@ -64,20 +64,19 @@ class DictController < ApplicationController
 
   def save_word
     id = params[:id]
-    word = LearnWord.where(:id=>id)
+    word = LearnWord.where(:id=>id).first
 
     if not word
       raise Exception.new("没有这个单词")
     end
 
-    @user
     ulw = UserLearnWord.where(:user_id => @user.id,:learn_word_id => word.id).first
 
     if ulw
       raise Exception.new("已经收藏过了喔~")
     end
 
-    ulW = UserLearnWord.new
+    ulw = UserLearnWord.new
     ulw.user_id=@user.id
     ulw.learn_word_id=word.id
     ulw.status=UserLearnWord::StateOk
@@ -94,10 +93,10 @@ class DictController < ApplicationController
   def my_words
     learn_word = UserLearnWord.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 10)
     learn_word_ok = learn_word.map do |item|
-      item.as_json(:include=>:learn_word)
+      item.as_json(:include=>[:learn_word,:video])
     end
 
-    respond_to_ok(learn_word_ok,"ok");
+    respond_to_ok({words:learn_word_ok,total_page:learn_word.total_pages},"ok");
   end
 
 end

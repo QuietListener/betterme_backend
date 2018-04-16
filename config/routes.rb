@@ -88,6 +88,6 @@ Rails.application.routes.draw do
   get   "api/search_word" =>"dict#search_word"
   get   "api/videos" => "dict#api_videos"
   post  "dict/save_word" => "dict#save_word"
-  get   "dict/my_words" => "dict#my_words"
-
+  get   "api/my_words" => "dict#my_words"
+  match 'api/my_words'=> 'application#options_result',via: [:options]
 end
