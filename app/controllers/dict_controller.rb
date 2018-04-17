@@ -61,6 +61,8 @@ class DictController < ApplicationController
     video.srt_url = params[:srt_url]
     video.srt_file_name = params[:srt_file_name]
     video.video_file_name = params[:video_file_name]
+    video.other_srt_file_name = params[:other_srt_file_name]
+    video.other_srt_url = params[:other_srt_url]
     video.poster = params[:poster]
 
     video.save!
