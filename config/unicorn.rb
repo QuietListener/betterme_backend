@@ -13,9 +13,9 @@ worker_processes 2
 
 working_directory Rails.root
 
-listen 6000
+listen 3000
 
-timeout 90
+timeout 60
 
 pid "#{Rails.root}/tmp/pids/unicorn.pid"
 
