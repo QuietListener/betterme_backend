@@ -14,3 +14,4 @@
 /.idea/**/*
 /public/upload/*
 /public/subtitles/*
+/config/database.yml
