@@ -48,6 +48,8 @@ class DictController < ApplicationController
       @video = Video.find(params[:id])
     end
 
+    @utypes = Utype.where("`status` != ?",Utype::TypeStatusDelete)
+
   end
 
   def createOrUpdate
@@ -64,15 +66,25 @@ class DictController < ApplicationController
     video.other_srt_file_name = params[:other_srt_file_name]
     video.other_srt_url = params[:other_srt_url]
     video.poster = params[:poster]
+    video.utype_id=params[:utype_id]
 
     video.save!
     redirect_to "/dict/video?id=#{video.id}"
   end
 
+  def api_utypes
+    @utypes = Utype.where("`status` != ?",Utype::TypeStatusDelete)
+    respond_to_ok(@utypes,"ok")
+  end
 
   def api_videos
-    @videos_ = Video.paginate(:page => params[:page], :per_page => 10)
-    respond_to_ok(@videos_,"ok")
+    if params[:utypes] and params[:utype_id] >= 0
+      @videos_ = Video.where(:utype_id => params[:utype_id]).paginate(:page => params[:page], :per_page => 4)
+    else
+      @videos_ = Video.paginate(:page => params[:page], :per_page => 4)
+    end
+
+    respond_to_ok({videos:@videos_,total_page:@videos_.total_pages},"ok");
   end
 
 

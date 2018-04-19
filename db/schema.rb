@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419073931) do
+ActiveRecord::Schema.define(version: 20180419080821) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -109,6 +109,13 @@ ActiveRecord::Schema.define(version: 20180419073931) do
     t.string   "password",     limit: 255
   end
 
+  create_table "utypes", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "status",     limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "videos", force: :cascade do |t|
     t.string   "title",               limit: 255
     t.string   "title_cn",            limit: 255
@@ -125,6 +132,7 @@ ActiveRecord::Schema.define(version: 20180419073931) do
     t.string   "srt_file_name",       limit: 255
     t.string   "other_srt_url",       limit: 255
     t.string   "other_srt_file_name", limit: 255
+    t.integer  "utype_id",            limit: 4
   end
 
 end

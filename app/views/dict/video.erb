@@ -42,6 +42,13 @@
       <!--<%end%>-->
     <!--</div>-->
 
+    <div>
+      <select name="utype_id">
+        <%@utypes.each do |u|%>
+           <option <%="selected='selected'" if (@video and u.id == @video.utype.id) %> value=<%=u.id%>><%=u.name%></option>
+        <%end%>
+      </select>
+    </div>
     <div  style="text-align: right;margin-right: 40px">
       <input type="submit" class="submit" value="确定" >
     </div>
