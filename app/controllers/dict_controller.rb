@@ -5,6 +5,8 @@ require("#{Rails.root.to_s}/app/models/learn_word.rb")
 
 UsedScorePerDay = 50;
 InitScore = 2100;
+VideosPerPage = 50
+WordsPerPage = 100
 
 class DictController < ApplicationController
 
@@ -79,9 +81,9 @@ class DictController < ApplicationController
 
   def api_videos
     if params[:utypes] and params[:utype_id] >= 0
-      @videos_ = Video.where(:utype_id => params[:utype_id]).paginate(:page => params[:page], :per_page => 4)
+      @videos_ = Video.where(:utype_id => params[:utype_id]).paginate(:page => params[:page], :per_page => VideosPerPage)
     else
-      @videos_ = Video.paginate(:page => params[:page], :per_page => 4)
+      @videos_ = Video.paginate(:page => params[:page], :per_page => VideosPerPage)
     end
 
     respond_to_ok({videos:@videos_,total_page:@videos_.total_pages},"ok");
@@ -117,7 +119,7 @@ class DictController < ApplicationController
 
 
   def my_words
-    learn_word = UserLearnWord.where(:user_id => @user.id).order("updated_at desc").paginate(:page => params[:page], :per_page => 10)
+    learn_word = UserLearnWord.where(:user_id => @user.id).order("updated_at desc").paginate(:page => params[:page], :per_page => WordsPerPage)
     learn_word_ok = learn_word.map do |item|
       item.as_json(:include=>[:learn_word,:video])
     end
