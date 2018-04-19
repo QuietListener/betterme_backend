@@ -52,8 +52,8 @@ class DictController < ApplicationController
 
   def createOrUpdate
     video = Video.new;
-    if params[:id]
-      video = Video.find(params[:id])
+    if params[:id] and params[:id].strip != ""
+      video = Video.where(:id=>params[:id]).first
     end
 
     video.title = params[:title]
@@ -105,12 +105,33 @@ class DictController < ApplicationController
 
 
   def my_words
-    learn_word = UserLearnWord.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 10)
+    learn_word = UserLearnWord.where(:user_id => @user.id).order("updated_at desc").paginate(:page => params[:page], :per_page => 10)
     learn_word_ok = learn_word.map do |item|
       item.as_json(:include=>[:learn_word,:video])
     end
 
     respond_to_ok({words:learn_word_ok,total_page:learn_word.total_pages},"ok");
+  end
+
+
+  def create_video_user_status
+    if params[:video_id] == nil or params[:video_id].strip == ""
+        raise Exception.new("video_id 为空")
+    end
+
+    v = Video.where(:id=>params[:video_id]).first
+    type = params[:type]
+    if (type == UserVideo::TypeLike or type == UserVideo::TypeWatched) and v != nil
+      u = UserVideo.new
+      u.user_id = @user.id
+      u.video_id= v.id
+      u.uvtype=type
+      u.save!
+    else
+      raise Exception.new("失败 视频不存在或者类型不存在");
+    end
+
+    respond_to_ok(u,"ok");
   end
 
 end

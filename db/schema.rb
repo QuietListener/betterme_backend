@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417084411) do
+ActiveRecord::Schema.define(version: 20180419073931) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -80,6 +80,16 @@ ActiveRecord::Schema.define(version: 20180417084411) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  create_table "user_videos", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "video_id",   limit: 4
+    t.integer  "uvtype",     limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "user_videos", ["user_id", "video_id", "uvtype"], name: "index_user_videos_on_user_id_and_video_id_and_uvtype", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "nick_name",    limit: 255
