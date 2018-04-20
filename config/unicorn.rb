@@ -9,7 +9,7 @@ module Rails
   end
 end
 
-worker_processes 2
+worker_processes 4
 
 working_directory Rails.root
 
@@ -33,8 +33,14 @@ check_client_connection false
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
-  defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.connection.disconnect!
+
+  puts "before fork"
+  begin
+    defined?(ActiveRecord::Base) and
+        ActiveRecord::Base.connection.disconnect!
+  rescue
+    puts "error:#{$!} at:#{$@}"
+  end
 
   old_pid = "#{server.config[:pid]}.oldbin"
   if File.exists?(old_pid) && old_pid != server.pid
@@ -54,6 +60,7 @@ end
 
 after_fork do |server, worker|
 
+  puts "after fork"
   # the following is *required* for Rails + "preload_app true",
   defined?(ActiveRecord::Base) and
       ActiveRecord::Base.establish_connection
