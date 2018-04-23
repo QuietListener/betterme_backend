@@ -119,7 +119,12 @@ class DictController < ApplicationController
 
 
   def my_words
-    learn_word = UserLearnWord.where(:user_id => @user.id).order("updated_at desc").paginate(:page => params[:page], :per_page => WordsPerPage)
+    if params[:vidoe_id] and params[:vidoe_id].strip != ""
+        learn_word = UserLearnWord.where(:user_id => @user.id,:video_id=>params[:video_id]).order("updated_at desc").paginate(:page => params[:page], :per_page => WordsPerPage)
+    else
+      learn_word = UserLearnWord.where(:user_id => @user.id).order("updated_at desc").paginate(:page => params[:page], :per_page => WordsPerPage)
+    end
+
     learn_word_ok = learn_word.map do |item|
       item.as_json(:include=>[:learn_word,:video])
     end
@@ -146,6 +151,35 @@ class DictController < ApplicationController
     end
 
     respond_to_ok(u,"ok");
+  end
+
+  def packages
+    @packages  = Package.paginate(:page => params[:page], :per_page => 10)
+  end
+
+
+  def package
+    @package = nil
+    if params[:id]
+      @package = Package.find(params[:id])
+    end
+  end
+
+
+
+  def createOrUpdatePackage
+    package = Package.new;
+    if params[:id] and params[:id].strip != ""
+      package = Package.where(:id=>params[:id]).first
+    end
+
+    package.title = params[:title]
+    package.poster = params[:poster]
+    package.title_cn=params[:title_cn]
+    package.desc=params[:desc]
+
+    package.save!
+    redirect_to "/dict/package?id=#{package.id}"
   end
 
 end

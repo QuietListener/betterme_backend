@@ -1,6 +1,12 @@
 {
   "srt_name":"/forrest_gump/forrest_gump.srt",
   "splits":[
-    ["00:03:19,496","00:04:48,420","7.7","/forrest_gump/forrest_gump_01_choclate.srt"]
+    ["00:03:19,496","00:04:48,420","7.7","/forrest_gump/forrest_gump_01_choclate.srt"],
+    ["00:06:29,941","00:07:34,385","0.0","/forrest_gump/forrest_gump_02_my_hourse.srt"],
+    ["00:29:35,787","00:31:35,486","1.2","/forrest_gump/forrest_gump_03_footballgame.srt"],
+    ["00:32:11,073","00:33:20,053","4.45","/forrest_gump/forrest_gump_04_friend.srt"],
+    ["00:33:24,030","00:35:19,063","0","/forrest_gump/forrest_gump_04_in_army.srt"],
+    ["01:02:47,102"," 01:03:32,761","0.6","/forrest_gump/forrest_gump_04_army_award.srt"]
+
   ]
 }

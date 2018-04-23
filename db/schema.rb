@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419080821) do
+ActiveRecord::Schema.define(version: 20180422175021) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20180419080821) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.string   "status",     limit: 255, default: "0"
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.string   "title_cn",    limit: 255
+    t.string   "desc",        limit: 255
+    t.string   "poster",      limit: 255
+    t.integer  "share_count", limit: 4,   default: 0
+    t.integer  "play_count",  limit: 4,   default: 0
+    t.integer  "star_count",  limit: 4,   default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "plan_alerts", force: :cascade do |t|
@@ -125,14 +137,17 @@ ActiveRecord::Schema.define(version: 20180419080821) do
     t.string   "desc_cn",             limit: 255
     t.string   "video_url",           limit: 255
     t.string   "srt_url",             limit: 255
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "poster",              limit: 255
     t.string   "video_file_name",     limit: 255
     t.string   "srt_file_name",       limit: 255
     t.string   "other_srt_url",       limit: 255
     t.string   "other_srt_file_name", limit: 255
     t.integer  "utype_id",            limit: 4
+    t.integer  "share_count",         limit: 4,   default: 0
+    t.integer  "play_count",          limit: 4,   default: 0
+    t.integer  "star_count",          limit: 4,   default: 0
   end
 
 end
