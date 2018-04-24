@@ -7,8 +7,22 @@
     ["00:32:11,073","00:33:20,053","4.45","/forrest_gump/forrest_gump_04_friend.srt"],
     ["00:33:24,030","00:35:19,063","0","/forrest_gump/forrest_gump_04_in_army.srt"],
     ["01:02:47,102"," 01:03:32,761","0.6","/forrest_gump/forrest_gump_04_army_award.srt"],
+
     ["01:13:47,963"," 01:15:32,055","0.6","/forrest_gump/forrest_gump_07_lenno.srt","http://www.lavafox.com/images/partVideo/92ba712a-8565-486c-85c6-b11e1c4f7439.mp4","http://www.lavafox.com/images/partImg/be27d125-43cb-48f6-b400-8ee953bf4535.JPG"],
+
     ["01:27:15,828","01:28:18,130","1.6","/forrest_gump/forrest_gump_08_make_money.srt","http://www.lavafox.com/images/partVideo/81df221e-cd65-44df-bd3c-04344701bf27.mp4","http://www.lavafox.com/images/partImg/0c4d2025-b3db-466f-a305-7ad4eeb35145.JPG"],
-    ["01:32:25,424","01:33:07,469","3.4","/forrest_gump/forrest_gump_09_lieutenant_dan.srt","http://www.lavafox.com/images/partVideo/1ae1b4f9-6879-4b2d-9cf4-864135355a86.mp4","http://www.lavafox.com/images/partImg/21250925-1f6d-4f08-80ea-5790ebd21f68.JPG"]
+
+    ["01:32:25,424","01:33:07,469","3.4","/forrest_gump/forrest_gump_09_lieutenant_dan.srt","http://www.lavafox.com/images/partVideo/1ae1b4f9-6879-4b2d-9cf4-864135355a86.mp4","http://www.lavafox.com/images/partImg/21250925-1f6d-4f08-80ea-5790ebd21f68.JPG"],
+
+    ["01:35:52,778","01:37:08,389","2.05","/forrest_gump/forrest_gump_10_bubba_gump_shrimp.srt","http://www.lavafox.com/images/partVideo/bf9cdc73-5a8f-42b6-913c-3e7e8e7764af.mp4","http://www.lavafox.com/images/partImg/b708d122-2ed1-4681-9249-eacd6e77db53.JPG"],
+
+    ["01:40:04,064","01:41:26,752","1.98","/forrest_gump/forrest_gump_11_dead.srt","http://www.lavafox.com/images/partVideo/7d3c6932-f47e-48c0-90fd-a0353af50f7d.mp4","http://www.lavafox.com/images/partImg/89dc47fc-92b7-4ed1-9477-1a1e4e04c3f8.JPG"],
+
+    ["01:41:36,804","01:42:23,785","3.98","/forrest_gump/forrest_gump_12_celebrity.srt","http://www.lavafox.com/images/partVideo/44ec1235-311f-415d-b016-57eec34eb95f.mp4","http://www.lavafox.com/images/partImg/d810b0c2-796e-42e9-b039-aaf4abd43062.JPG"],
+
+
+    ["01:52:38,135","01:53:58,913","3.39","/forrest_gump/forrest_gump_13_run.srt","http://www.lavafox.com/images/partVideo/ee89a484-e2b7-4356-8f60-2af8c770ba42.mp4","http://www.lavafox.com/images/partImg/1e828108-19cc-41b1-803b-0983b59a33bb.JPG"],
+
+    ["02:07:52,177","02:09:01,110","3.4","/forrest_gump/forrest_gump_14_jenny.srt","http://www.lavafox.com/images/partVideo/9bf7ae1a-7ed5-4f1e-948b-58dce2086a26.mp4","http://www.lavafox.com/images/partImg/768c7125-7892-450c-a3b6-ebba4583db11.JPG"]
   ]
 }
