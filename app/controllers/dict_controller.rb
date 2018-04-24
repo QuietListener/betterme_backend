@@ -133,6 +133,18 @@ class DictController < ApplicationController
   end
 
 
+
+  def like_video
+    params[:type]=UserVideo::TypeLike
+    return create_video_user_status()
+  end
+
+
+  def watch_video
+    params[:type]=UserVideo::TypeWatched
+    return create_video_user_status()
+  end
+
   def create_video_user_status
     if params[:video_id] == nil or params[:video_id].strip == ""
         raise Exception.new("video_id 为空")
@@ -182,6 +194,25 @@ class DictController < ApplicationController
     redirect_to "/dict/package?id=#{package.id}"
   end
 
+
+  def typed_videos(type)
+    uvs = UserVideo.where(:type=>type, :user_id => @user.id).order("created_at desc").paginate(:page => params[:page], :per_page => 20)
+    vids = uvs.map {|uv| uv.video_id}
+
+    videos = Video.where(:id=>vids)
+
+    respond_to_ok({vidoes:videos,total_pages:uvs.total_pages},"ok");
+
+  end
+
+
+  def liked_videos
+    return typed_videos(UserVideo::TypeWatched)
+  end
+
+  def watched_videos
+    return typed_videos(UserVideo::TypeWatched)
+  end
 end
 
 

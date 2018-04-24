@@ -91,5 +91,11 @@ Rails.application.routes.draw do
   get   "api/my_words" => "dict#my_words"
   get   "api/utypes" => "dict#api_utypes"
 
+  post  "api/like_video" => "dict#like_video"
+  post  "api/watch_video" => "dict#watch_video"
+
+  get  "api/liked_videos" => "dict#liked_videos"
+  get  "api/watched_videos" => "dict#watched_videos"
+
   match 'api/my_words'=> 'application#options_result',via: [:options]
 end
