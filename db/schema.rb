@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422175021) do
+ActiveRecord::Schema.define(version: 20180426140722) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20180422175021) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.string   "status",     limit: 255, default: "0"
+  end
+
+  create_table "package_videos", force: :cascade do |t|
+    t.integer  "package_id", limit: 4
+    t.integer  "video_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "packages", force: :cascade do |t|

@@ -171,7 +171,7 @@ class DictController < ApplicationController
 
 
   def package
-    @package = nil
+    @package = Package.new
     if params[:id]
       @package = Package.find(params[:id])
     end
@@ -195,6 +195,31 @@ class DictController < ApplicationController
   end
 
 
+  def add_video_2_package
+    package = Package.find(params[:package_id])
+    video = Video.find(params[:video_id])
+
+    if package and video
+      package.add_video(video.id)
+    end
+
+    redirect_to "/dict/package?id=#{package.id}"
+
+  end
+
+
+  def remove_video_from_package
+    package = Package.find(params[:package_id])
+    video = Video.find(params[:video_id])
+
+    if package and video
+      package.remove_video(video.id)
+    end
+
+    redirect_to "/dict/package?id=#{package.id}"
+
+  end
+
   def typed_videos(type)
     uvs = UserVideo.where(:type=>type, :user_id => @user.id).order("created_at desc").paginate(:page => params[:page], :per_page => 20)
     vids = uvs.map {|uv| uv.video_id}
@@ -213,6 +238,20 @@ class DictController < ApplicationController
   def watched_videos
     return typed_videos(UserVideo::TypeWatched)
   end
+
+
+
+  def api_packages
+    @packages  = Package.paginate(:page => params[:page], :per_page => 10)
+    respond_to_ok({packages:@packages, total_page:@packages.total_pages},"ok");
+  end
+
+
+  def api_package
+    @package = Package.where(:id=>params[:id])
+    respond_to_ok( @package.as_json(:include=>[:videos]),"ok");
+  end
+
 end
 
 

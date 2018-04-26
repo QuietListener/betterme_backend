@@ -97,5 +97,16 @@ Rails.application.routes.draw do
   get  "api/liked_videos" => "dict#liked_videos"
   get  "api/watched_videos" => "dict#watched_videos"
 
+
+  get "dict/packages"=>"dict#packages"
+  get "dict/package"=>"dict#package"
+  post "dict/createOrUpdatePackage"=>"dict#createOrUpdatePackage"
+  post "dict/add_video_2_package"=>"dict#add_video_2_package"
+  post "dict/remove_video_from_package"=>"dict#remove_video_from_package"
+
+  get  "api/packages" => "dict#api_packages"
+
+  get  "api/package" => "dict#api_package"
+
   match 'api/my_words'=> 'application#options_result',via: [:options]
 end
