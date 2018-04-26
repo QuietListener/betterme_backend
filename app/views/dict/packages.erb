@@ -1,0 +1,43 @@
+
+<%= javascript_include_tag 'jquery.min' %>
+
+<style>
+  .video-box
+  {
+    border:1px solid black;
+    padding:4px;
+    margin:8px;
+  }
+</style>
+
+<div>
+  <%@videos.each do |v|%>
+    <div class="video-box">
+      <div style="width:30%;display:inline-block">
+        <img src="<%=v.poster%>" style="width:200px;"></img>
+      </div>
+
+      <div style="width:60%;display:inline-block">
+        <%=v.title%>
+        <%=v.title_cn%><br>
+        <%=v.srt_url%><br>
+        <%=v.other_srt_url%><br>
+        <%=v.video_url%>
+        <%=v.video_file_name%><br>
+        <%=v.srt_file_name%><br>
+        <%=v.other_srt_file_name%><br>
+        <span style="border:1px solid ">
+        <%=v.utype.name if v.utype %>
+        </span>
+      </div>
+
+      <div style="text-align: right">
+        <a style="margin-right: 10px" href="/dict/video?id=<%=v.id%>">编辑</a>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+<div>
+  <%= will_paginate @videos %>
+</div>
