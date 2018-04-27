@@ -13,12 +13,14 @@
 <div>
   <%@videos.each do |v|%>
     <div class="video-box">
+
       <div style="width:30%;display:inline-block">
         <img src="<%=v.poster%>" style="width:200px;"></img>
       </div>
 
       <div style="width:60%;display:inline-block">
-        <%=v.title%>
+        id:<%=v.id%><br>
+        <%=v.title%><br>
         <%=v.title_cn%><br>
         <%=v.srt_url%><br>
         <%=v.other_srt_url%><br>
