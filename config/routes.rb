@@ -105,8 +105,12 @@ Rails.application.routes.draw do
   post "dict/remove_video_from_package"=>"dict#remove_video_from_package"
 
   get  "api/packages" => "dict#api_packages"
-
   get  "api/package" => "dict#api_package"
+  post "api/like_package"=>"dict#api_like_package"
+  post "api/unlike_package"=>"dict#api_unlike_package"
+  post "api/add_package"=>"dict#api_add_package"
+  get  "api/my_videos" => "dict#api_my_videos"
+  get  "api/my_packages" => "dict#api_my_packages"
 
   match 'api/my_words'=> 'application#options_result',via: [:options]
 end

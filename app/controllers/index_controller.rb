@@ -163,15 +163,15 @@ class IndexController < ApplicationController
 
   def user
 
-    user = @user.as_json
+    user = @user.as_json(:include=>[:package])
     r = @user.reward
+
     if r and r.token and r.state == UserReward::StateInit
         user["lucky_token"] = r.token
     else
       user["lucky_token"] = nil;
     end
 
-    user["statistics"] = @user.statistics()
     respond_to_ok(user,"");
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180426140722) do
+ActiveRecord::Schema.define(version: 20180427033735) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(version: 20180426140722) do
 
   add_index "user_learn_words", ["user_id", "learn_word_id"], name: "index_user_learn_words_on_user_id_and_learn_word_id", unique: true, using: :btree
 
+  create_table "user_packages", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "package_id", limit: 4
+    t.integer  "ttype",      limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "user_packages", ["user_id", "package_id", "ttype"], name: "index_user_packages_on_user_id_and_package_id_and_ttype", unique: true, using: :btree
+
   create_table "user_rewards", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
     t.integer  "reward_type", limit: 4
@@ -126,6 +136,7 @@ ActiveRecord::Schema.define(version: 20180426140722) do
     t.string   "user_token",   limit: 255
     t.string   "name",         limit: 255
     t.string   "password",     limit: 255
+    t.integer  "package_id",   limit: 4
   end
 
   create_table "utypes", force: :cascade do |t|

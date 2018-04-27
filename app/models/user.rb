@@ -88,4 +88,56 @@ class User < ActiveRecord::Base
     return {total_score:total_score,daka_count:daka_count}
   end
 
+  def package
+     return nil  if(self.package_id.blank?)
+     Package.where(:id=>self.package_id).first
+  end
+
+
+  def add_package(package_id,type)
+
+    if not [UserPackage::TypeLike,UserPackage::TypeFinished,UserPackage::TypePlayed].include? type
+      return;
+    end
+
+    up_ = UserPackage.where(:user_id => self.id,:package_id => package_id,:ttype => type).first
+
+    if up_
+      puts "#{up_}, 已经存在了"
+      return;
+    end
+
+    package = Package.find(package_id)
+
+    up = UserPackage.new
+    up.user_id=self.id
+    up.package_id=package.id
+    up.ttype=type
+    up.save!
+
+
+    if(type == UserPackage::TypeLike)
+      package.star_count += 1;
+      package.save
+    elsif(type == UserPackage::TypePlayed)
+      package.play_count += 1;
+      package.save
+    end
+
+    return;
+  end
+
+
+  def remove_package(package_id,type)
+    package = Package.find(package_id)
+    up = UserPackage.where(:user_id => self.id,:package_id => package.id,:ttype=>type).first
+    up.delete if up
+
+    if type == UserPackage::TypeLike
+      package.star_count -= 1 if package.star_count>0
+      package.save;
+    end
+  end
+
+
 end

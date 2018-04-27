@@ -142,27 +142,57 @@ class DictController < ApplicationController
 
   def watch_video
     params[:type]=UserVideo::TypeWatched
-    return create_video_user_status()
+    create_video_user_status()
+    respond_to_ok({},"ok");
   end
 
   def create_video_user_status
-    if params[:video_id] == nil or params[:video_id].strip == ""
+    if params[:video_id] == nil or params[:video_id] == ""
         raise Exception.new("video_id 为空")
     end
 
     v = Video.where(:id=>params[:video_id]).first
     type = params[:type]
     if (type == UserVideo::TypeLike or type == UserVideo::TypeWatched) and v != nil
-      u = UserVideo.new
-      u.user_id = @user.id
-      u.video_id= v.id
-      u.uvtype=type
-      u.save!
+
+      uv = UserVideo.where(:user_id => @user.id,:video_id=> params[:video_id],:uvtype => type).first
+
+      if not uv
+        u = UserVideo.new
+        u.user_id = @user.id
+        u.video_id= v.id
+        u.uvtype=type
+        u.save!
+      end
+
+      package_id = params[:package_id]
+      if(type == UserVideo::TypeWatched) and package_id
+
+        package =  Package.where(:id=>package_id).first
+
+        if package and package.finished(@user.id) == true
+
+          up1 =  UserPackage.where(:user_id => @user.id,:package_id => package_id,:ttype => UserPackage::TypeFinished).first;
+
+          return if  up1 #如果已经完成了就不用了
+
+          up =  UserPackage.where(:user_id => @user.id,:package_id => package_id,:ttype => UserPackage::TypePlayed).first;
+
+          up = UserPackage.new if not up
+
+          up.package_id = package.id
+          up.user_id=@user.id
+          up.ttype=UserPackage::TypeFinished
+          up.save;
+
+        end
+
+      end
+
     else
       raise Exception.new("失败 视频不存在或者类型不存在");
     end
 
-    respond_to_ok(u,"ok");
   end
 
   def packages
@@ -239,8 +269,6 @@ class DictController < ApplicationController
     return typed_videos(UserVideo::TypeWatched)
   end
 
-
-
   def api_packages
     @packages  = Package.paginate(:page => params[:page], :per_page => 10)
     respond_to_ok({packages:@packages, total_page:@packages.total_pages},"ok");
@@ -248,8 +276,59 @@ class DictController < ApplicationController
 
 
   def api_package
-    @package = Package.where(:id=>params[:id])
-    respond_to_ok( @package.as_json(:include=>[:videos]),"ok");
+    @package = Package.where(:id=>params[:id]).first
+
+    package = @package.as_json(:include=>[:videos])
+    count = UserPackage.where(:user_id => @user.id, :package_id => @package.id,:ttype=>UserPackage::TypeLike).count
+
+    package[:like] = count > 0
+    package[:finished] = @package.finished(@user.id)
+
+    ups = UserVideo.where(:user_id => @user.id).pluck(:video_id,:uvtype)
+    package[:videos_status] = ups.as_json;
+
+    respond_to_ok( package,"ok");
+  end
+
+
+  def api_add_package
+    @package = Package.find(params[:package_id])
+
+    user = User.find(@user.id)
+    user.package_id=@package.id
+    user.save!
+    @user.add_package(params[:package_id],UserPackage::TypePlayed)
+
+    respond_to_ok(user,"ok")
+  end
+
+  def api_like_package
+    @user.add_package(params[:package_id],UserPackage::TypeLike)
+
+    respond_to_ok(params[:package_id],"ok")
+  end
+
+  def api_play_package
+    @user.add_package(params[:package_id],UserPackage::TypePlayed)
+    respond_to_ok(@user,"ok")
+  end
+
+  def api_unlike_package
+    @user.remove_package(params[:package_id],UserPackage::TypeLike)
+    respond_to_ok(params[:package_id],"ok")
+  end
+
+
+  def api_my_packages
+      ups = UserPackage.where(:user_id=>@user.id)
+      ups_ = ups.map{|up| up.as_json(:include=>[:package])}
+      respond_to_ok(ups_,"ok");
+  end
+
+  def api_my_videos
+      uvs = UserVideo.where(:user_id => @user.id)
+      @uvs = uvs.map{|uv|  uv.as_json(:include=>[:video])}
+      respond_to_ok(@uvs,"ok");
   end
 
 end
