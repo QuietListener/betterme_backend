@@ -119,7 +119,7 @@ class DictController < ApplicationController
 
 
   def my_words
-    if params[:vidoe_id] and params[:vidoe_id].strip != ""
+    if params[:video_id] and params[:video_id].strip != ""
         learn_word = UserLearnWord.where(:user_id => @user.id,:video_id=>params[:video_id]).order("updated_at desc").paginate(:page => params[:page], :per_page => WordsPerPage)
     else
       learn_word = UserLearnWord.where(:user_id => @user.id).order("updated_at desc").paginate(:page => params[:page], :per_page => WordsPerPage)
