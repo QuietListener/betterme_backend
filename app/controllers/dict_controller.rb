@@ -320,7 +320,14 @@ class DictController < ApplicationController
 
 
   def api_my_packages
-      ups = UserPackage.where(:user_id=>@user.id)
+      ups = []
+      if not params[:ttype].blank?
+        ups = UserPackage.where(:user_id=>@user.id,:ttype => params[:ttype])
+      else
+        ups = UserPackage.where(:user_id=>@user.id)
+      end
+
+
       ups_ = ups.map{|up| up.as_json(:include=>[:package])}
       respond_to_ok(ups_,"ok");
   end
