@@ -112,5 +112,8 @@ Rails.application.routes.draw do
   get  "api/my_videos" => "dict#api_my_videos"
   get  "api/my_packages" => "dict#api_my_packages"
 
+  get  "api/statistics" => "dict#api_statistics"
+
+
   match 'api/my_words'=> 'application#options_result',via: [:options]
 end

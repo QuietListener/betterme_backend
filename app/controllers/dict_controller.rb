@@ -331,6 +331,18 @@ class DictController < ApplicationController
       respond_to_ok(@uvs,"ok");
   end
 
+  def api_statistics
+      watched_video = UserVideo.where(:user_id => @user.id,:uvtype => UserVideo::TypeWatched).pluck(:video_id,:created_at).map{|item| [item[0], item[1].strftime('%Y-%m-%d').to_s]}
+
+    finished_package_count = UserPackage.where(:user_id => @user.id,:ttype => UserPackage::TypeFinished).count()
+
+    watched_video_count = watched_video.size();
+
+    ret = {watched_video:watched_video,finished_package_count:finished_package_count,watched_video_count:watched_video_count}
+
+    respond_to_ok(ret,"ok");
+  end
+
 end
 
 
