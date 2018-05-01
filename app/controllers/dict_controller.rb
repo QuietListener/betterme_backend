@@ -297,7 +297,10 @@ class DictController < ApplicationController
     user = User.find(@user.id)
     user.package_id=@package.id
     user.save!
-    @user.add_package(params[:package_id],UserPackage::TypePlayed)
+
+    if not user.package_exists(@package.id,UserPackage::TypeFinished)
+      @user.add_package(params[:package_id],UserPackage::TypePlayed)
+    end
 
     respond_to_ok(user,"ok")
   end

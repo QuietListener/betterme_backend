@@ -93,17 +93,20 @@ class User < ActiveRecord::Base
      Package.where(:id=>self.package_id).first
   end
 
-
-  def add_package(package_id,type)
-
+  def package_exists(package_id,type)
     if not [UserPackage::TypeLike,UserPackage::TypeFinished,UserPackage::TypePlayed].include? type
       return;
     end
-
     up_ = UserPackage.where(:user_id => self.id,:package_id => package_id,:ttype => type).first
 
-    if up_
-      puts "#{up_}, 已经存在了"
+    return up_ != nil
+
+  end
+
+  def add_package(package_id,type)
+
+    if package_exists(package_id,type)
+      puts "package_id = #{package_id}, 已经存在了"
       return;
     end
 
