@@ -46,10 +46,13 @@
 
   <%@package.videos.each do |v|%>
       <div>
-        <span>title:<%=v.title%></span>:
-        <span>title_cn<%=v.title%></span>
+        \ <span>id:{<%=v.id%>}</span> :
+        <span>title:<%=v.title%></span>  :  <br>
+        <span>title_cn<%=v.title_cn%></span>
         <form style="display: inline" action="/dict/remove_video_from_package" method="post">
           <input style="display:none" name="package_id" value="<%=@package.id if (@package and @package.id!=nil) %>">
+
+
           <input style="display:none" name="video_id" value="<%=v.id%>" >
           <input type="submit" class="submit" value="delete" >
         </form>

@@ -55,9 +55,7 @@ end
 
 #没有resize的图片
 task :grab_lavafox  => :environment do
-  # create Mechanize instance
-
-  url_ = 'http://www.lavafox.com/study-movie.aspx?Mid=202&&Sid=4549'
+  url_ = ENV["video_url"]
   url = URI.parse url_
 
   cookies = {"ASP.NET_SessionId"=>"pxv3qvoqg0trfviueisca0ob","UM_distinctid"=>"162d6795e36627-0089ea74b098f9-336b7b05-fa000-162d6795e372f6","CNZZDATA1000377994"=>"1685663423-1525249860-%7C1525321232","LoginInfo"=>"userEmail=yangtingjun1@gmail.com&userName=buptjunjun&userpass=76756"}
@@ -109,11 +107,14 @@ task :grab_lavafox  => :environment do
       end
 
 
-      title = title_text.gsub(/^[\(|\)|）|（]/,"")
+      title = title_text.gsub(/^[\(|\)|）|（] | [\(|\)|）|（]$ ]/,"")
       ret = {title:title,poster:poster, video_url:video_url, srt_en:srt_en, srt_ce:srt_ce}
       puts ret ;
-  end
 
-  #puts dom_video.html
+      puts "\r\r\n\n"
+      ret.each do |k,v|
+        puts "#{k}   #{v}"
+      end
+  end
 
 end
