@@ -61,6 +61,7 @@ class DictController < ApplicationController
     end
 
     video.title = params[:title]
+    video.title_cn = params[:title_cn]
     video.video_url = params[:video_url]
     video.srt_url = params[:srt_url]
     video.srt_file_name = params[:srt_file_name]

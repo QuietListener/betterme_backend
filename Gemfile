@@ -67,3 +67,4 @@ gem 'rest-client'
 
 gem 'will_paginate', '~> 3.1.0'
 gem 'srt'
+gem 'httpclient'
