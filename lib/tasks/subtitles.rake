@@ -29,7 +29,7 @@ end
 
 
 =begin
-rake split_subtites config_path="/Users/junjun/Documents/项目/ruby/rubymine/betterme/docs/subtitles/jobs_comencement/config.json" video_path="/Users/junjun/Documents/创业/betterme/视频/Steve_Jobs_2005_Stanford_Commencement_Address.mp4"
+rake split_subtites config_path="/Users/junjun/Documents/项目/ruby/rubymine/betterme/docs/subtitles/jobs_comencement/config.json"
 =end
 #没有resize的图片
 task :split_subtites  => :environment do
