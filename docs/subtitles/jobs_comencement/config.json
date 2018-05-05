@@ -1,0 +1,9 @@
+{
+  "srt_name":"/jobs_comencement/Steve_Jobs_2005_Stanford_Commencement_Address.en.srt",
+  "splits":[
+    ["00:00:07,470","00:05:33,346","7.47",
+      "/jobs_comencement/Steve_Jobs_2005_Stanford_Commencement_Address.en_1.srt"],
+    ["00:05:38,600","00:15:03,760","5",
+      "/jobs_comencement/Steve_Jobs_2005_Stanford_Commencement_Address.en_2.srt"]
+  ]
+}

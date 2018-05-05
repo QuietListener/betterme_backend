@@ -1,0 +1,616 @@
+1
+00:00:05,000 --> 00:00:09,099
+My second story is about love and loss.
+
+2
+00:00:10,430 --> 00:00:14,329
+I was lucky I found what I loved to do early in life.
+
+3
+00:00:14,710 --> 00:00:17,919
+Woz and I started Apple in my parents garage when I was 20.
+
+4
+00:00:18,270 --> 00:00:21,659
+We worked hard, and in 10 years Apple had grown from just the two of
+
+5
+00:00:21,660 --> 00:00:25,979
+us in a garage into a $2 billion company with over 4000 employees.
+
+6
+00:00:26,060 --> 00:00:29,749
+We had just released our finest creation the Macintosh
+
+7
+00:00:29,750 --> 00:00:32,039
+a year earlier, and I had just turned 30.
+
+8
+00:00:32,760 --> 00:00:34,349
+And then I got fired.
+
+9
+00:00:35,450 --> 00:00:38,299
+How can you get fired from a company you started?
+
+10
+00:00:38,800 --> 00:00:42,299
+Well, as Apple grew we hired someone who I thought
+
+11
+00:00:42,300 --> 00:00:44,859
+was very talented to run the company with me,
+
+12
+00:00:45,080 --> 00:00:46,869
+and for the first year or so things went well.
+
+13
+00:00:46,870 --> 00:00:49,079
+But then our visions of the future began
+
+14
+00:00:49,080 --> 00:00:52,139
+to diverge and eventually we had a falling out.
+
+15
+00:00:52,170 --> 00:00:55,069
+When we did, our Board of Directors sided with him.
+
+16
+00:00:55,550 --> 00:00:59,129
+So at 30 I was out. And very publicly out.
+
+17
+00:00:59,130 --> 00:01:02,289
+What had been the focus of my entire adult life was gone,
+
+18
+00:01:02,290 --> 00:01:04,099
+and it was devastating.
+
+19
+00:01:04,930 --> 00:01:07,038
+I really didn't know what to do for a few months.
+
+20
+00:01:07,510 --> 00:01:10,269
+I felt that I had let the previous generation of entrepreneurs
+
+21
+00:01:10,270 --> 00:01:13,609
+down - that I had dropped the baton as it was being passed to me.
+
+22
+00:01:13,610 --> 00:01:16,889
+I met with David Packard and Bob Noyce
+
+23
+00:01:17,280 --> 00:01:20,099
+and tried to apologize for screwing up so badly.
+
+24
+00:01:20,820 --> 00:01:22,239
+I was a very public failure,
+
+25
+00:01:22,240 --> 00:01:24,489
+and I even thought about running away from the valley.
+
+26
+00:01:24,970 --> 00:01:29,789
+But something slowly began to dawn on me I still loved what I did.
+
+27
+00:01:29,990 --> 00:01:34,199
+The turn of events at Apple had not changed that one bit.
+
+28
+00:01:34,200 --> 00:01:37,369
+I had been rejected, but I was still in love.
+
+29
+00:01:38,490 --> 00:01:40,239
+And so I decided to start over.
+
+30
+00:01:41,310 --> 00:01:44,309
+I didn't see it then, but it turned out that getting fired from
+
+31
+00:01:44,310 --> 00:01:46,719
+Apple was the best thing that could have ever happened to me.
+
+32
+00:01:47,410 --> 00:01:49,588
+The heaviness of being successful was
+
+33
+00:01:49,590 --> 00:01:52,424
+replaced by the lightness of being a beginner again,
+
+34
+00:01:52,620 --> 00:01:53,559
+less sure about everything.
+
+35
+00:01:53,560 --> 00:01:57,299
+It freed me to enter one of the most creative periods of my life.
+
+36
+00:01:57,820 --> 00:02:00,749
+During the next five years, I started a company named NeXT,
+
+37
+00:02:00,930 --> 00:02:02,288
+another company named Pixar,
+
+38
+00:02:02,290 --> 00:02:05,479
+and fell in love with an amazing woman who would become my wife.
+
+39
+00:02:06,180 --> 00:02:09,009
+Pixar went on to create the worlds first computer animated feature
+
+40
+00:02:09,010 --> 00:02:10,504
+film, Toy Story,
+
+41
+00:02:10,780 --> 00:02:16,379
+and is now the most successful animation studio in the world.
+
+42
+00:02:16,380 --> 00:02:20,199
+In a remarkable turn of events, Apple bought NeXT,
+
+43
+00:02:20,290 --> 00:02:23,109
+I returned to Apple, and the technology we developed at
+
+44
+00:02:23,110 --> 00:02:25,838
+NeXT is at the heart of Apple's current renaissance.
+
+45
+00:02:26,290 --> 00:02:29,179
+And Laurene and I have a wonderful family together.
+
+46
+00:02:30,280 --> 00:02:32,149
+I'm pretty sure none of this would
+
+47
+00:02:32,150 --> 00:02:34,149
+have happened if I hadn't been fired from Apple.
+
+48
+00:02:34,550 --> 00:02:38,288
+It was awful tasting medicine, but I guess the patient needed it.
+
+49
+00:02:38,830 --> 00:02:44,259
+Sometimes life hits you in the head with a brick. Don't lose faith.
+
+50
+00:02:44,700 --> 00:02:47,609
+I'm convinced that the only thing that kept me going was that I loved
+
+51
+00:02:47,610 --> 00:02:50,704
+what I did. You've got to find what you love.
+
+52
+00:02:50,940 --> 00:02:53,869
+And that is as true for your work as it is for your lovers.
+
+53
+00:02:54,570 --> 00:02:56,499
+Your work is going to fill a large part of your life,
+
+54
+00:02:56,500 --> 00:02:58,848
+and the only way to be truly satisfied
+
+55
+00:02:58,850 --> 00:03:01,208
+is to do what you believe is great work.
+
+56
+00:03:01,480 --> 00:03:04,857
+And the only way to do great work is to love what you do.
+
+57
+00:03:04,860 --> 00:03:09,519
+If you haven't found it yet, keep looking. Don't settle.
+
+58
+00:03:10,140 --> 00:03:13,909
+As with all matters of the heart, you'll know when you find it.
+
+59
+00:03:13,910 --> 00:03:15,334
+And, like any great relationship,
+
+60
+00:03:15,460 --> 00:03:18,393
+it just gets better and better as the years roll on.
+
+61
+00:03:18,660 --> 00:03:22,549
+So keep looking. Don't settle.
+
+62
+00:03:31,700 --> 00:03:34,888
+My third story is about death.
+
+63
+00:03:35,670 --> 00:03:38,929
+When I was 17, I read a quote that went something like:
+
+64
+00:03:38,930 --> 00:03:42,154
+"If you live each day as if it was your last,
+
+65
+00:03:42,310 --> 00:03:44,368
+someday you'll most certainly be right."
+
+66
+00:03:47,260 --> 00:03:51,759
+It made an impression on me, and since then, for the past 33 years,
+
+67
+00:03:51,920 --> 00:03:53,539
+I have looked in the mirror every morning
+
+68
+00:03:53,540 --> 00:03:56,419
+and asked myself: "If today were the last day of my life,
+
+69
+00:03:56,420 --> 00:04:00,118
+would I want to do what I am about to do today?"
+
+70
+00:04:00,710 --> 00:04:04,069
+And whenever the answer has been "No" for too many days in a row,
+
+71
+00:04:04,320 --> 00:04:05,959
+I know I need to change something.
+
+72
+00:04:06,970 --> 00:04:10,329
+Remembering that I'll be dead soon is the most important
+
+73
+00:04:10,330 --> 00:04:13,609
+tool I've ever encountered to help me make the big choices in life.
+
+74
+00:04:14,320 --> 00:04:19,114
+Because almost everything all external expectations, all pride,
+
+75
+00:04:19,290 --> 00:04:21,044
+all fear of embarrassment or failure -
+
+76
+00:04:21,270 --> 00:04:24,119
+these things just fall away in the face of death,
+
+77
+00:04:24,580 --> 00:04:26,679
+leaving only what is truly important.
+
+78
+00:04:27,230 --> 00:04:30,069
+Remembering that you are going to die is the best
+
+79
+00:04:30,070 --> 00:04:34,128
+way I know to avoid the trap of thinking you have something to lose.
+
+80
+00:04:34,600 --> 00:04:38,969
+You are already naked. There is no reason not to follow your heart.
+
+81
+00:04:40,350 --> 00:04:43,379
+About a year ago I was diagnosed with cancer.
+
+82
+00:04:43,380 --> 00:04:46,564
+I had a scan at 7:30 in the morning,
+
+83
+00:04:46,680 --> 00:04:49,469
+and it clearly showed a tumor on my pancreas.
+
+84
+00:04:50,000 --> 00:04:52,009
+I didn't even know what a pancreas was.
+
+85
+00:04:52,670 --> 00:04:54,939
+The doctors told me this was almost
+
+86
+00:04:54,940 --> 00:04:57,189
+certainly a type of cancer that is incurable,
+
+87
+00:04:57,190 --> 00:05:01,469
+and that I should expect to live no longer than three to six months.
+
+88
+00:05:02,240 --> 00:05:06,469
+My doctor advised me to go home and get my affairs in order,
+
+89
+00:05:06,720 --> 00:05:09,309
+which is doctor's code for prepare to die.
+
+90
+00:05:09,310 --> 00:05:14,359
+It means to try to tell your kids everything you thought
+
+91
+00:05:14,360 --> 00:05:17,569
+you'd have the next 10 years to tell them in just a few months.
+
+92
+00:05:18,250 --> 00:05:20,149
+It means to make sure everything is buttoned
+
+93
+00:05:20,150 --> 00:05:23,109
+up so that it will be as easy as possible for your family.
+
+94
+00:05:23,110 --> 00:05:25,849
+It means to say your goodbyes.
+
+95
+00:05:27,860 --> 00:05:29,979
+I lived with that diagnosis all day.
+
+96
+00:05:30,530 --> 00:05:32,734
+Later that evening I had a biopsy,
+
+97
+00:05:32,990 --> 00:05:35,034
+where they stuck an endoscope down my throat,
+
+98
+00:05:35,230 --> 00:05:37,404
+through my stomach and into my intestines,
+
+99
+00:05:37,660 --> 00:05:40,879
+put a needle into my pancreas and got a few cells from the tumor.
+
+100
+00:05:40,880 --> 00:05:44,729
+I was sedated, but my wife, who was there,
+
+101
+00:05:44,950 --> 00:05:47,908
+told me that when they viewed the cells under a microscope
+
+102
+00:05:48,140 --> 00:05:50,899
+the doctors started crying because it turned out to be
+
+103
+00:05:50,900 --> 00:05:54,869
+a very rare form of pancreatic cancer that is curable with surgery.
+
+104
+00:05:55,400 --> 00:05:59,516
+I had the surgery and thankfully I'm fine now.
+
+105
+00:06:07,200 --> 00:06:09,704
+This was the closest I've been to facing death,
+
+106
+00:06:09,960 --> 00:06:12,839
+and I hope its the closest I get for a few more decades.
+
+107
+00:06:13,260 --> 00:06:14,519
+Having lived through it,
+
+108
+00:06:15,020 --> 00:06:17,649
+I can now say this to you with a bit more certainty than when
+
+109
+00:06:17,650 --> 00:06:21,718
+death was a useful but purely intellectual concept:
+
+110
+00:06:21,819 --> 00:06:24,269
+No one wants to die.
+
+111
+00:06:24,660 --> 00:06:28,789
+Even people who want to go to heaven don't want to die to get there.
+
+112
+00:06:28,790 --> 00:06:32,219
+And yet death is the destination we all share.
+
+113
+00:06:32,590 --> 00:06:36,574
+No one has ever escaped it. And that is as it should be,
+
+114
+00:06:36,770 --> 00:06:40,889
+because Death is very likely the single best invention of Life.
+
+115
+00:06:41,420 --> 00:06:42,984
+It is Life's change agent.
+
+116
+00:06:43,030 --> 00:06:45,449
+It clears out the old to make way for the new.
+
+117
+00:06:46,270 --> 00:06:50,879
+Right now the new is you, but someday not too long from now,
+
+118
+00:06:50,970 --> 00:06:54,159
+you will gradually become the old and be cleared away.
+
+119
+00:06:54,930 --> 00:06:57,407
+Sorry to be so dramatic, but it is quite true.
+
+120
+00:06:58,549 --> 00:07:03,689
+Your time is limited, so don't waste it living someone else's life.
+
+121
+00:07:04,510 --> 00:07:06,809
+Don't be trapped by dogma which is living
+
+122
+00:07:06,810 --> 00:07:08,998
+with the results of other people's thinking.
+
+123
+00:07:09,169 --> 00:07:12,589
+Don't let the noise of others' opinions drown out your own inner
+
+124
+00:07:12,590 --> 00:07:14,849
+voice. And most important,
+
+125
+00:07:15,040 --> 00:07:17,679
+have the courage to follow your heart and intuition.
+
+126
+00:07:17,980 --> 00:07:21,749
+They somehow already know what you truly want to become.
+
+127
+00:07:22,270 --> 00:07:24,599
+Everything else is secondary.
+
+128
+00:07:36,120 --> 00:07:37,309
+When I was young,
+
+129
+00:07:37,690 --> 00:07:41,484
+there was an amazing publication called The Whole Earth Catalog,
+
+130
+00:07:41,730 --> 00:07:44,189
+which was one of the bibles of my generation.
+
+131
+00:07:44,660 --> 00:07:48,169
+It was created by a fellow named Stewart Brand not far from here
+
+132
+00:07:48,170 --> 00:07:51,878
+in Menlo Park, and he brought it to life with his poetic touch.
+
+133
+00:07:52,239 --> 00:07:53,989
+This was in the late 1960's,
+
+134
+00:07:53,990 --> 00:07:56,574
+before personal computers and desktop publishing,
+
+135
+00:07:56,840 --> 00:08:00,739
+so it was all made with typewriters, scissors, and polaroid cameras.
+
+136
+00:08:01,080 --> 00:08:03,339
+It was sort of like Google in paperback form,
+
+137
+00:08:03,340 --> 00:08:07,744
+35 years before Google came along: it was idealistic,
+
+138
+00:08:07,970 --> 00:08:10,949
+overflowing with neat tools, and great notions.
+
+139
+00:08:11,890 --> 00:08:13,489
+Stewart and his team put out several
+
+140
+00:08:13,490 --> 00:08:14,879
+issues of The Whole Earth Catalog,
+
+141
+00:08:14,880 --> 00:08:19,309
+and then when it had run its course, they put out a final issue.
+
+142
+00:08:19,800 --> 00:08:23,519
+It was the mid-1970s, and I was your age.
+
+143
+00:08:25,120 --> 00:08:26,829
+On the back cover of their final issue
+
+144
+00:08:26,830 --> 00:08:30,469
+was a photograph of an early morning country road,
+
+145
+00:08:30,720 --> 00:08:31,719
+the kind you might find yourself
+
+146
+00:08:31,719 --> 00:08:34,589
+hitchhiking on if you were so adventurous.
+
+147
+00:08:35,330 --> 00:08:39,538
+Beneath it were the words: "Stay Hungry. Stay Foolish."
+
+148
+00:08:39,540 --> 00:08:44,629
+It was their farewell message as they signed off. Stay Hungry.
+
+149
+00:08:44,960 --> 00:08:49,128
+Stay Foolish. And I have always wished that for myself.
+
+150
+00:08:50,150 --> 00:08:54,939
+And now, as you graduate to begin anew, I wish that for you.
+
+151
+00:08:55,080 --> 00:08:58,008
+Stay Hungry. Stay Foolish.
+
+152
+00:08:58,131 --> 00:09:01,253
+Thank you all very much.
+
+153
+00:09:23,900 --> 00:09:27,289
+The preceding program is copyrighted by Stanford University.
+
+154
+00:09:27,480 --> 00:09:30,159
+Please visit us at stanford.edu
+
