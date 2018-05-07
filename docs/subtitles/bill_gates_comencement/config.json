@@ -1,0 +1,19 @@
+{
+  "srt_name":"/bill_gates_comencement/bill_gates_comencement_harvard.srt",
+  "splits":[
+    ["00:00:05,440","00:06:09,090","5.44",
+      "/bill_gates_comencement/bill_gates_comencement_harvard_1.srt"],
+
+
+    ["00:06:10,140","00:12:45,390","0",
+      "/bill_gates_comencement/bill_gates_comencement_harvard_2.srt"],
+
+    ["00:12:45,392","00:21:39,460","0",
+      "/bill_gates_comencement/bill_gates_comencement_harvard_3.srt"],
+
+    ["00:21:40,000","00:29:09,000","0",
+      "/bill_gates_comencement/bill_gates_comencement_harvard_4.srt"]
+
+
+  ]
+}

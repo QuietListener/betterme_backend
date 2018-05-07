@@ -14,7 +14,7 @@ require 'httpclient'
 #
 def cut_mp4(mp4_file, starttime, endtime,out_file)
 
-  command = "ffmpeg -ss #{starttime} -t #{endtime - starttime} -i #{mp4_file} -acodec copy #{out_file}"
+  command = "ffmpeg -ss #{starttime} -t #{endtime - starttime} -i #{mp4_file} -r 20 -vf scale=280:210 -acodec copy #{out_file}"
   puts "====command===="
   puts command
   result=`#{command}`
@@ -163,4 +163,34 @@ task :grab_lavafox  => :environment do
       end
   end
 
+end
+
+
+#没有resize的图片
+task :split_subtites_show  => :environment do
+
+  configPath = ENV["config_path"]
+
+  config = JSON.parse(File.new(configPath).read)
+  puts config.as_json
+
+  basedir = "#{Rails.root}/docs/subtitles/"
+
+  fileName = "#{basedir}/#{config['srt_name']}"
+  puts "srt file : #{fileName}";
+
+  file = SRT::File.parse(File.new(fileName))
+  file.lines.each do |item|
+    puts item
+  end
+end
+
+
+
+#没有resize的图片
+task :snapchat  => :environment do
+  video_path = ENV["video_path"]
+  time=ENV["time"]
+  out_path=ENV["out_path"]
+  snapshot(video_path,time,out_path)
 end

@@ -1,0 +1,289 @@
+1
+00:00:05,440 --> 00:00:08,470
+接下来的下一位演说者
+our next speaker
+
+3
+00:00:08,470 --> 00:00:11,500
+是最著名的推动个人计算机革命的企业家
+first known as the entrepreneur of the personal computer revolution
+
+4
+00:00:13,360 --> 00:00:16,160
+时代杂志上刊出的
+was named by time magazine
+
+5
+00:00:16,160 --> 00:00:23,360
+20世纪最有影响力的100个人之一，
+as one of the hundred people who most  influence the 20th century else well as
+
+6
+00:00:23,360 --> 00:00:32,809
+也是2004年、2005和2006年以及2007年
+one of the hundred most influential  people of 2004 2005-2006
+
+7
+00:00:32,809 --> 00:00:36,230
+世界上最有影响力的100人之一。
+and again in 2007
+
+8
+00:00:36,230 --> 00:00:39,320
+这位仁兄本来可以在这里完成学业，
+just think what you could have achieved,
+
+9
+00:00:43,700 --> 00:00:46,700
+如果他在这里再读两年的话。
+if you had stayed here another two years.
+
+10
+00:00:50,230 --> 00:00:53,230
+没错 yeah
+
+11
+00:00:56,930 --> 00:01:03,950
+他在1973年秋天入读哈佛就已经对计算机科学入迷，
+he enrolled at Harvard in the fall of 1973 keenly interested in computer
+
+12
+00:01:03,950 --> 00:01:06,950
+但却没有一个明确的学习计划，
+science but without a definite study  plan
+
+13
+00:01:09,730 --> 00:01:16,690
+在玩拉德克利夫扑克游戏中悟到了他未来的商机，
+in between intense poker games at  Radcliffe he met his future business
+
+14
+00:01:16,690 --> 00:01:21,190
+他和他的伙伴Steve Ballmer为它们的第一台微软计算机
+partner Steve Ballmer and he developed a  version of the programming language
+
+15
+00:01:21,190 --> 00:01:27,880
+开发出第一个版本的程序语言Basic,并且共同撰写和发表了
+basic for the first micro computer and  co-authored and published a paper on
+
+16
+00:01:27,880 --> 00:01:31,030
+第一篇关于算法语言的论文。
+algorithms with computer scientist christos papadimitriou.
+
+17
+00:01:31,030 --> 00:01:38,470
+这位演讲者是我们学校
+our speaker is a  person of many talents.
+
+18
+00:01:38,470 --> 00:01:41,620
+众多杰出同学中的一位
+a close friend in college
+
+19
+00:01:41,620 --> 00:01:48,250
+通过记录我看到当年他在著名的普特南数学课中打瞌睡，
+i'm using the recall seeing him doze off  during the prestigious Putnam math exam
+
+20
+00:01:48,250 --> 00:01:52,870
+不过尽管如此他仍得了高分。
+despite this napping he scored  remarkably well,
+
+21
+00:01:53,410 --> 00:02:00,400
+在大三时，他停学离开哈佛
+in his junior year he took a leave of  absence from Harvard to devote his
+
+22
+00:02:00,400 --> 00:02:07,690
+1975年开始，同他的朋友Paul Allen全力投入发展微软公司。
+energies to Microsoft a company he had  begun in 1975 with his friend paul allen
+
+23
+00:02:07,690 --> 00:02:14,890
+自2000年以来，他开始把精力放到慈善事业上，
+since 2000 he has begun to concentrate on a number of philanthropic endeavors
+
+24
+00:02:14,890 --> 00:02:20,170
+为各种慈善组织作出非凡的贡献。
+making extraordinary donations to  various charitable organizations and
+
+25
+00:02:20,170 --> 00:02:24,730
+透过梅林达.盖茨基金，为世界上多种科学研究作出贡献。
+scientific research programs around the  world, through the Bill and Melinda Gates
+
+26
+00:02:24,730 --> 00:02:31,330
+在离开母校33年之后，我非常荣幸地
+foundation. after a 33-year leave of  absence from his alma matter
+
+27
+00:02:31,930 --> 00:02:36,130
+介绍您，威廉.盖茨博士！
+i am pleased to present to you doctor. William Gates!
+
+28
+00:02:39,890 --> 00:02:42,890
+（起立鼓掌......）
+(Standing Ovation)
+
+29
+00:03:03,520 --> 00:03:13,960
+谢谢！尊敬的Bok校长，Rubenstine前校长，即将上任的Faust校长，
+Thank You president Bak former  president Rubenstein incoming president Faust,
+
+30
+00:03:13,960 --> 00:03:21,160
+哈佛集团的各位成员，监管理事会的各位理事，
+members of the Harvard corporation  and the Board of Overseers members of
+
+31
+00:03:21,160 --> 00:03:25,270
+各位老师，各位家长，同学们：
+the faculty parents and especially the  graduates：
+
+32
+00:03:25,270 --> 00:03:30,670
+有一句话我等了30年，现在终于可以说了，
+I've been waiting more than 30 years to  say this
+
+33
+00:03:31,420 --> 00:03:36,970
+老爸，我总是跟你说我会回来拿到我的学位的，
+dad，I always told you I'd come back and  get my degree.
+
+34
+00:03:48,100 --> 00:03:53,080
+我要感谢哈佛大学在这个时候给我这个荣誉，
+I want to thank Harvard for this honor
+
+35
+00:03:53,080 --> 00:03:58,480
+明年，我就要换工作了，我终于可以在简历上写
+I'll be changing my job next year and it  will be nice to finally have a college
+
+36
+00:03:58,480 --> 00:04:00,370
+我有一个本科学位了，真不错啊！
+degree on my resume.
+
+37
+00:04:00,370 --> 00:04:08,380
+我为今天在座的各位同学感到高兴，你们拿到学位可比我简单多了。
+I applaud the graduates for taking a much more direct route to your degrees
+
+38
+00:04:08,380 --> 00:04:13,480
+哈佛的校报称我是
+from our my part I'm just happy that the  Crimson called me
+
+39
+00:04:13,480 --> 00:04:16,480
+“哈佛历史上最成功的辍学生”
+Harvard's most successful drop out.
+
+40
+00:04:17,519 --> 00:04:22,139
+我想这大概使我有资格代表我这一类学生发言，
+I guess that makes me valedictorian of my own special class
+
+41
+00:04:23,009 --> 00:04:26,009
+在所有失败者当中，我做的最好，
+I did the best of everyone who fail
+
+42
+00:04:27,000 --> 00:04:35,010
+但我还是要提醒大家，我使得Ballmer也从哈佛商学院
+but i also want to be recognized as the guy who got Steve Ballmer to drop out of
+
+43
+00:04:35,010 --> 00:04:38,010
+退学了。
+business school
+
+44
+00:04:40,590 --> 00:04:43,740
+因此我是一个有恶劣影响力的人，
+I'm a bad influence,
+
+45
+00:04:45,380 --> 00:04:50,000
+这就是为什么我被邀请来在你们的毕业典礼上演讲。
+that's why i was invited to speak at your graduation
+
+46
+00:04:50,840 --> 00:04:57,020
+如果我在你们的入学欢迎仪式上演讲，那么能够坚持到今天在这里的也许会少很多，
+if I'd spoken at your orientation you  were of you might be here today
+
+47
+00:04:58,180 --> 00:05:05,770
+对我来说，在哈佛的求学是一段非凡的经历，
+Harvard was a phenomenal experience for  me
+
+48
+00:05:06,280 --> 00:05:12,850
+校园生活很有趣，我常去旁听我没选修的课，
+academic life was fascinating I used to sit in on lots of classes that I haven't
+
+49
+00:05:12,850 --> 00:05:16,630
+课外生活也很棒，
+even signed up for and dorm life was  tripping
+
+50
+00:05:16,630 --> 00:05:19,690
+我在Radcliffe过着逍遥自在的日子，
+I lived up at Radcliffe and career house
+
+51
+00:05:22,760 --> 00:05:26,210
+每天我的宿舍总有很多人一直待到半夜，讨论各种事情，
+there are always a lot of people in my dorm room late at night discussing
+
+52
+00:05:26,210 --> 00:05:30,890
+因为每个人都知道我从不考虑
+things because everyone knew that I didn't worry about
+
+53
+00:05:30,890 --> 00:05:32,660
+第二天早起，
+getting up in the morning.
+
+54
+00:05:32,660 --> 00:05:38,180
+这使我成了校园里那些不安分学生的头头，我们过从甚密，
+that's how I came to be the leader of  the anti social group we clung to each
+
+55
+00:05:38,180 --> 00:05:42,350
+做出一种拒绝所有正常学生的姿态。
+other as a way of validating our rejection of all those social people
+
+56
+00:05:42,920 --> 00:05:49,220
+Radcliffe是个过日子的好地方，那里的女生比男生多，
+Radcliffe was a great place to live  there were more women up there and most
+
+57
+00:05:49,220 --> 00:05:51,590
+而且大多数男生都是理工科的，
+of the guys were mouth science types.
+
+58
+00:05:51,590 --> 00:06:00,380
+这种状况为我创造了最好的机会，如果你们明白我的意思。
+the combination offered me the best odds  if you know what I mean.
+
+59
+00:06:00,380 --> 00:06:09,089
+可惜的是，我正是在这里学到了人生中悲伤的一课，机会大，并不等于你就会成功。
+that's where I learned the sad lesson that improving  your odds doesn't guarantee success
+
