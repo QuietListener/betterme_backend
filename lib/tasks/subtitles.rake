@@ -14,7 +14,7 @@ require 'httpclient'
 #
 def cut_mp4(mp4_file, starttime, endtime,out_file)
 
-  command = "ffmpeg -ss #{starttime} -t #{endtime - starttime} -i #{mp4_file} -r 20 -vf scale=280:210 -acodec copy #{out_file}"
+  command = "ffmpeg -ss #{starttime} -t #{endtime - starttime} -i #{mp4_file} -r 16 -vf scale=280:210 -acodec copy #{out_file}"
   puts "====command===="
   puts command
   result=`#{command}`
@@ -29,7 +29,7 @@ end
 
 
 =begin
-rake split_subtites config_path="/Users/junjun/Documents/项目/ruby/rubymine/betterme/docs/subtitles/jobs_comencement/config.json"
+rake split_subtites config_path="/Users/junjun/Documents/项目/ruby/rubymine/betterme/docs/subtitles/jobs_comencement/config_cn.json"
 =end
 #没有resize的图片
 task :split_subtites  => :environment do
@@ -72,7 +72,7 @@ end
 
 
 =begin
-rake split_videos config_path="/Users/junjun/Documents/项目/ruby/rubymine/betterme/docs/subtitles/jobs_comencement/config.json" video_path="/Users/junjun/Documents/创业/betterme/视频/Steve_Jobs_2005_Stanford_Commencement_Address.mp4"
+rake split_videos config_path="/Users/junjun/Documents/项目/ruby/rubymine/betterme/docs/subtitles/jobs_comencement/config_cn.json" video_path="/Users/junjun/Documents/创业/betterme/视频/Steve_Jobs_2005_Stanford_Commencement_Address.mp4"
 =end
 task :split_videos  => :environment do
 
