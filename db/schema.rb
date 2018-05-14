@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427033735) do
+ActiveRecord::Schema.define(version: 20180512094255) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -166,6 +166,8 @@ ActiveRecord::Schema.define(version: 20180427033735) do
     t.integer  "share_count",         limit: 4,   default: 0
     t.integer  "play_count",          limit: 4,   default: 0
     t.integer  "star_count",          limit: 4,   default: 0
+    t.integer  "level",               limit: 4,   default: 0
+    t.integer  "words_count",         limit: 4,   default: 0
   end
 
 end

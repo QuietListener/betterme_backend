@@ -87,4 +87,39 @@ class BUtils
 
     return true;
   end
+
+
+
+  #下载url到某个文件
+  def self.download(url,filepath)
+    begin
+      File.open(filepath, "wb") do |saved_file|
+        # the following "open" is provided by open-uri
+        open(url, "rb") do |read_file|
+          saved_file.write(read_file.read)
+        end
+      end
+      return true
+    rescue => e
+      puts e.message
+      puts e.backtrace
+      return nil
+    end
+    return nil
+  end
+
+
+  def self.zip_files(file_list, zip_file_path)
+    Zip::File.open(zip_file_path, Zip::File::CREATE) do |zipfile|
+      file_list.each do |file_path|
+        # Two arguments:
+        # - The name of the file as it will appear in the archive
+        # - The original file, including the path to find it
+        zipfile.add(File.basename(file_path),file_path)
+      end
+    end
+
+  end
+
+
 end

@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/QuietListener/ruby_lib_of_andy.git
+  revision: d842e736aaf5b52d5f3c8a5f7aa841238948eb8b
+  branch: master
+  specs:
+    ruby_lib_of_andy (0.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -210,6 +217,7 @@ DEPENDENCIES
   rails (= 4.2.8)
   rest-client
   ruby-ole
+  ruby_lib_of_andy!
   rubyzip (>= 1.0.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

@@ -194,3 +194,45 @@ task :snapchat  => :environment do
   out_path=ENV["out_path"]
   snapshot(video_path,time,out_path)
 end
+
+
+
+#没有resize的图片
+task :tongji_words_count  => :environment do
+
+  Video.all.each do |v|
+
+    url = v.srt_url
+
+    tmp = "/tmp/srt.srt"
+    RubyLibOfAndy::Http.download(url,tmp);
+
+    file = SRT::File.parse(File.new(tmp))
+
+    count = 0;
+    file.lines.each do |item|
+
+      texts = item.text
+      t1 = ""
+      if(texts.length > 0)
+          t1 = texts[0]
+      end
+      t2 = ""
+      if(texts.length > 1)
+        t2 = texts[1]
+      end
+
+      t1_ = t1.split(/\s+/).length
+      t2_ = t2.split(/\s+/).length
+      length =  t1_ > t2_ ? t1_ : t2_
+      count  = count + length;
+    end
+    puts v.title
+    puts count;
+
+    v.words_count = count;
+    v.save;
+   end
+
+end
+

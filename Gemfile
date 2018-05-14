@@ -68,3 +68,5 @@ gem 'rest-client'
 gem 'will_paginate', '~> 3.1.0'
 gem 'srt'
 gem 'httpclient'
+
+gem 'ruby_lib_of_andy', :git => "https://github.com/QuietListener/ruby_lib_of_andy.git", :branch => "master"
