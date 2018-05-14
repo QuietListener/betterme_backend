@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, with: :show_error
 
   def  get_user
-    access_token = cookies[:access_token]
+    access_token = cookies[:access_token] || params[:access_token]
     if access_token.blank?
       raise Exception.new("没有登录")
     end
