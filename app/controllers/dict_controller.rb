@@ -351,7 +351,10 @@ class DictController < ApplicationController
 
     watched_video_count = watched_video.size();
 
-    ret = {watched_video:watched_video,finished_package_count:finished_package_count,watched_video_count:watched_video_count}
+    watched_videos = Video.where(:id=>watched_video.map{|item|item[0]});
+    listen_word_count = watched_videos.inject(0){|t,v|t+=v.words_count; t};
+
+    ret = {watched_video:watched_video,finished_package_count:finished_package_count,watched_video_count:watched_video_count,listen_word_count:listen_word_count}
 
     respond_to_ok(ret,"ok");
   end
