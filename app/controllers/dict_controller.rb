@@ -21,7 +21,9 @@ class DictController < ApplicationController
     saved = false
     logined = false;
     if @word
-      access_token = cookies[:access_token] || params[:access_token]
+      access_token = cookies[:access_token]
+      access_token = params[:access_token] if access_token.blank?
+
       if access_token
         @user = User.where(:access_token => access_token).first
         @user.password=nil if @user
