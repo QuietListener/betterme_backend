@@ -116,4 +116,9 @@ Rails.application.routes.draw do
 
 
   match 'api/my_words'=> 'application#options_result',via: [:options]
+
+
+
+
+  get "backend/users"=>"backend#users"
 end

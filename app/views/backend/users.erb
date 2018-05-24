@@ -1,0 +1,29 @@
+
+<%= javascript_include_tag 'jquery.min' %>
+
+<style>
+  .video-box
+  {
+    border:1px solid black;
+    padding:4px;
+    margin:8px;
+  }
+</style>
+
+<div>
+  <%@uall.each do |v|%>
+    <div class="video-box">
+
+      <div style="width:60%;display:inline-block">
+        <%=v.id%> |
+        <%=v.name||"no name"%> |
+        <%=v.created_at%>
+      </div>
+    </div>
+
+  <%end%>
+</div>
+
+<div>
+  <%= will_paginate @uall %>
+</div>
