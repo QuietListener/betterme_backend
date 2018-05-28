@@ -41,33 +41,54 @@ function load_subtitle(url,flag)
     });
 }
 
-window.add_subtitle=function(cur_vtt,cur_vtt_tran)
+window.add_subtitle=function(v,cur_vtt,cur_vtt_tran,pre_time,next_time)
 {
-    var nodes = `<div id="vtt_node" style="width:100%;padding:4px;font-size:18px;position:relative;background: black;color:white">`;
 
+    var nodes = jQuery(`<div id="vtt_node" style="width:100%;padding:2px;margin-top:-16px;font-size:18px;position:relative;background: black;color:white;display:inline-block"></div>`);
+
+    if(pre_time!=null && pre_time>=0)
+    {
+        console.log("add pre_time");
+        var node_pre = jQuery(`<div id="pre_btn" style="color:white;width:10%;display:inline-block;vertical-align: middle">pre</div>`);
+        node_pre.on("click", function(){
+            if(v)
+            {
+                console.log("set currentTime:",pre_time);
+                v.currentTime = pre_time;
+            }
+        });
+
+        nodes.append(node_pre);
+    }
+
+    var subtitles = jQuery(`<div id="subtitle_container" style="width:80%;display:inline-block;vertical-align: middle"></div>`)
     if(cur_vtt)
     {
-        nodes+=`<p id="cur_vvt" style="text-align: center;font-size:18px;margin-top:10px;margin-bottom:10px;color:yellow">${cur_vtt.text}</p>`;
+        var tmp = jQuery(`<p id="cur_vvt" style="text-align: center;font-size:18px;margin-top:10px;margin-bottom:10px;color:yellow">${cur_vtt.text}</p>`);
+        subtitles.append(tmp);
     }
 
     if(cur_vtt_tran)
     {
-        nodes+=`<p id="cur_vvt_tran" style="text-align: center;font-size:18px;margin-top:10px;margin-bottom:10px;color:yellow">${cur_vtt_tran.text}</p>`;
+        var tmp = jQuery(`<p id="cur_vvt_tran" style="text-align: center;font-size:18px;margin-top:10px;margin-bottom:10px;color:yellow">${cur_vtt_tran.text}</p>`);
+        subtitles.append(tmp);
     }
 
+    nodes.append(subtitles);
 
-    nodes+=`</div>`
+
+
 
     if(window.vvt_node)
     {
         window.vvt_node.remove();
     }
 
-    window.vvt_node = jQuery(nodes);
-
-    window.vvt_node.on("click",function(){
-        console.log("cur_vvt",$(this).text());
-        troggle(v); })
+    window.vvt_node = nodes;
+    //
+    // window.vvt_node.on("click",function(){
+    //     console.log("cur_vvt",$(this).text());
+    //     troggle(v); })
 
     var append_position = null;
     var selectors = ["#watch-headline-title"]
@@ -203,7 +224,7 @@ setTimeout( function() {
                         console.log(`tran: ${en_cur_vtt_tran.startTime} : ${en_cur_vtt_tran.text}`)
                     }
 
-                    window.add_subtitle(en_cur_vtt,en_cur_vtt_tran);
+                    window.add_subtitle(v,en_cur_vtt,en_cur_vtt_tran,0,null);
 
                 }
 
