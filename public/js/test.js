@@ -78,9 +78,43 @@ setTimeout( function() {
                             if(window.vvt_node)
                                 window.vvt_node.remove();
 
-                            window.vvt_node = jQuery(`<div id="vtt_node" style="width:100%;padding:4px;font-size:14px;z-index:1024;position:absolute; bottom:50px"><p style="text-align: center">${cur_vtt.text}</p></div>`);
+                            window.vvt_node = jQuery(`<div id="vtt_node" style="width:100%;padding:4px;font-size:18px;z-index:1024;position:absolute; bottom:50px;background: black;color:white"><p style="text-align: center">${cur_vtt.text}</p></div>`);
 
-                            jQuery("#player-api").append(window.vvt_node);
+                            var append_position = null;
+                            var selectors = ["#player-api"]
+                            for(let i = 0; i < selectors.length; i++)
+                            {
+                                append_position = jQuery(selectors[i]);
+                                if(append_position && append_position.length > 0 )
+                                {
+                                   break;
+                                }
+                                else
+                                {
+                                    append_position = null;
+                                }
+                            }
+
+                            if(append_position != null)
+                            {
+                                append_position.append(function(index, html){
+                                    if(index == 0)
+                                    {
+                                        return window.vvt_node;
+                                        console.log("===")
+                                    }
+                                })
+
+                                console.log("append_position is ",append_position[0]);
+                                break;
+                            }
+                            else
+                            {
+                               console.log("append_position is null")
+                            }
+
+
+
                         }
                         break;
                     }
