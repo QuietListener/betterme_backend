@@ -2,12 +2,16 @@
  * Created by junjun on 2018/5/26.
  */
 
+const FlagEn = "en";
+const FlagTran = 'tran';
+
 console.log("loaded...")
 
-//var srt_url = `https://video.google.com/timedtext?hl=zh-TW&lang=zh-TW&v=kIzFz9T5rhI&fmt=vtt`
+//var srt_url_tran = `https://video.google.com/timedtext?hl=zh-TW&lang=zh-TW&v=kIzFz9T5rhI&fmt=vtt`
+var srt_url_tran = `https://video.google.com/timedtext?hl=zh-CN&lang=zh-CN&v=kIzFz9T5rhI&fmt=vtt`
 var srt_url = `https://video.google.com/timedtext??hl=en&lang=en&v=kIzFz9T5rhI&fmt=vtt`
 
-function load_subtitle(url)
+function load_subtitle(url,flag)
 {
     console.log("load_subtitle:",url)
     jQuery.ajax({
@@ -20,7 +24,14 @@ function load_subtitle(url)
             var parser = new WebVTTParser();
             var tree = parser.parse(data);
             console.log("tree",tree);
-            window.vtt = tree;
+            if(flag == FlagEn)
+            {
+                window.vtt = tree;
+            }
+            else if(flag == FlagTran)
+            {
+                window.vtt_tran = tree;
+            }
         },
         complete:function(data)
         {
@@ -30,6 +41,60 @@ function load_subtitle(url)
     });
 }
 
+window.add_subtitle=function(cur_vtt,cur_vtt_tran)
+{
+    var nodes = `<div id="vtt_node" style="width:100%;padding:4px;font-size:18px;position:relative;background: black;color:white">`;
+
+    if(cur_vtt)
+    {
+        nodes+=`<p id="cur_vvt" style="text-align: center;font-size:18px;margin-top:10px;margin-bottom:10px;color:yellow">${cur_vtt.text}</p>`;
+    }
+
+    if(cur_vtt_tran)
+    {
+        nodes+=`<p id="cur_vvt_tran" style="text-align: center;font-size:18px;margin-top:10px;margin-bottom:10px;color:yellow">${cur_vtt_tran.text}</p>`;
+    }
+
+
+    nodes+=`</div>`
+
+    if(window.vvt_node)
+    {
+        window.vvt_node.remove();
+    }
+
+    window.vvt_node = jQuery(nodes);
+
+    window.vvt_node.on("click",function(){
+        console.log("cur_vvt",$(this).text());
+        troggle(v); })
+
+    var append_position = null;
+    var selectors = ["#watch-headline-title"]
+    for(let i = 0; i < selectors.length; i++)
+    {
+        append_position = jQuery(selectors[i]);
+        if(append_position && append_position.length > 0 )
+        {
+            break;
+        }
+        else
+        {
+            append_position = null;
+        }
+    }
+
+    if(append_position != null)
+    {
+        window.vvt_node.insertBefore(append_position);
+
+        console.log("append_position is ",append_position[0]);
+    }
+    else
+    {
+        console.log("append_position is null")
+    }
+}
 
 var jquery_url = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
 var vtt_url = 'https://quuz.org/webvtt/parser.js'
@@ -45,9 +110,28 @@ for(var i = 0; i < urls.length; i++)
 
 var interval = null;
 
+function troggle(v)
+{
+    if(!v)
+        return;
+
+    if(v.paused == null || v.paused == undefined)
+        return;
+
+    if(v.paused == true)
+    {
+        v.play();
+    }
+    else
+    {
+        v.pause()
+    }
+}
+
 setTimeout( function() {
     console.log("window loaded");
-    load_subtitle(srt_url);
+    load_subtitle(srt_url,FlagEn);
+    load_subtitle(srt_url_tran,FlagTran)
 
     if(interval != null)
     {
@@ -58,88 +142,77 @@ setTimeout( function() {
 
             var v = document.getElementsByTagName("video")[0]
             var vtt = window.vtt;
-            if( vtt && v )
+            var vtt_tran = window.vtt_tran
+
+            if( (vtt || vtt_tran) && v )
             {
                 var cur_time = v.getCurrentTime();
-
-
-                for(let i = 0; i < vtt.cues.length; i++)
+                var changed = false;
+                if(vtt)
                 {
-                    if(cur_time > vtt.cues[i].endTime)
-                        continue;
-                    else
-                    {
-                        if(window.vtt_index != i)
+                    for (let i = 0; i < vtt.cues.length; i++) {
+                        if (cur_time > vtt.cues[i].endTime)
                         {
-                            console.log(cur_time);
-                            window.vtt_index = i;
-                            var cur_vtt = vtt.cues[i];
-                            console.log(cur_vtt.text);
-
-                            if(window.vvt_node)
-                                window.vvt_node.remove();
-
-                            var  pre_vtt_txt = "";
-                            if(i-1 >= 0)
-                            {
-                                pre_vtt_txt = vtt.cues[i-1].text;
-                            }
-
-                            var  next_vtt_text = "";
-                            if(i+1<vtt.cues.length)
-                            {
-                                next_vtt_text= vtt.cues[i+1].text;
-                            }
-
-
-                            window.vvt_node = jQuery(`<div id="vtt_node" style="width:100%;padding:4px;font-size:18px;z-index:1024;position:absolute; bottom:40px;background: black;color:white">
-         
-          <p style="text-align: center">${pre_vtt_txt}</p>
-          <p style="text-align: center;font-size:18px;margin-top:10px;margin-bottom:10px;color:yellow">${cur_vtt.text}</p>
-           <p style="text-align: center">${next_vtt_text}</p>
-          
-</div>`);
-
-                            var append_position = null;
-                            var selectors = ["#player-api"]
-                            for(let i = 0; i < selectors.length; i++)
-                            {
-                                append_position = jQuery(selectors[i]);
-                                if(append_position && append_position.length > 0 )
-                                {
-                                   break;
-                                }
-                                else
-                                {
-                                    append_position = null;
-                                }
-                            }
-
-                            if(append_position != null)
-                            {
-                                append_position.append(function(index, html){
-                                    if(index == 0)
-                                    {
-                                        return window.vvt_node;
-                                        console.log("===")
-                                    }
-                                })
-
-                                console.log("append_position is ",append_position[0]);
-                                break;
-                            }
-                            else
-                            {
-                               console.log("append_position is null")
-                            }
-
-
-
+                            continue;
                         }
-                        break;
+                        else
+                        {
+                            if (window.vtt_index != i)
+                            {
+                                window.vtt_index = i;
+                                changed = true;
+                            }
+                            break;
+                        }
                     }
+                }//if(vtt) end
+
+                if(vtt_tran)
+                {
+                    for (let i = 0; i < vtt_tran.cues.length; i++) {
+                        if (cur_time > vtt.cues[i].endTime)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (window.vtt_tran_index != i)
+                            {
+                                window.vtt_tran_index = i;
+                                changed = true;
+                            }
+                            break;
+                        }
+                    }
+                }//if(vtt_tran) end
+
+
+                if(changed == true)
+                {
+                    var en_cur_vtt = null;
+                    if(window.vtt_index && window.vtt_index >= 0)
+                    {
+                        en_cur_vtt = window.vtt.cues[window.vtt_index];
+                        console.log(`en: ${en_cur_vtt.startTime} : ${en_cur_vtt.text}`)
+                    }
+
+                    var en_cur_vtt_tran = null;
+                    if(window.vtt_tran_index && window.vtt_tran_index >= 0)
+                    {
+                        en_cur_vtt_tran = window.vtt_tran.cues[window.vtt_tran_index];
+                        console.log(`tran: ${en_cur_vtt_tran.startTime} : ${en_cur_vtt_tran.text}`)
+                    }
+
+                    window.add_subtitle(en_cur_vtt,en_cur_vtt_tran);
+
                 }
-            }
+
+            }// if( (vtt || vtt_tran) && v ) end
+
+
+
     },500);
+
 },3000);
+
 
