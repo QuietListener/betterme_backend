@@ -4,7 +4,8 @@
 
 console.log("loaded...")
 
-var srt_url = `https://video.google.com/timedtext?hl=zh-TW&lang=zh-TW&v=kktBxP3656o&fmt=vtt`
+//var srt_url = `https://video.google.com/timedtext?hl=zh-TW&lang=zh-TW&v=kIzFz9T5rhI&fmt=vtt`
+var srt_url = `https://video.google.com/timedtext??hl=en&lang=en&v=kIzFz9T5rhI&fmt=vtt`
 
 function load_subtitle(url)
 {
@@ -78,7 +79,26 @@ setTimeout( function() {
                             if(window.vvt_node)
                                 window.vvt_node.remove();
 
-                            window.vvt_node = jQuery(`<div id="vtt_node" style="width:100%;padding:4px;font-size:18px;z-index:1024;position:absolute; bottom:50px;background: black;color:white"><p style="text-align: center">${cur_vtt.text}</p></div>`);
+                            var  pre_vtt_txt = "";
+                            if(i-1 >= 0)
+                            {
+                                pre_vtt_txt = vtt.cues[i-1].text;
+                            }
+
+                            var  next_vtt_text = "";
+                            if(i+1<vtt.cues.length)
+                            {
+                                next_vtt_text= vtt.cues[i+1].text;
+                            }
+
+
+                            window.vvt_node = jQuery(`<div id="vtt_node" style="width:100%;padding:4px;font-size:18px;z-index:1024;position:absolute; bottom:40px;background: black;color:white">
+         
+          <p style="text-align: center">${pre_vtt_txt}</p>
+          <p style="text-align: center;font-size:18px;margin-top:10px;margin-bottom:10px;color:yellow">${cur_vtt.text}</p>
+           <p style="text-align: center">${next_vtt_text}</p>
+          
+</div>`);
 
                             var append_position = null;
                             var selectors = ["#player-api"]
