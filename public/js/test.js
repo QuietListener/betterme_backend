@@ -6,7 +6,7 @@ const FlagEn = "en";
 const FlagTran = 'tran';
 
 console.log("loaded...")
-
+window
 //var srt_url_tran = `https://video.google.com/timedtext?hl=zh-TW&lang=zh-TW&v=kIzFz9T5rhI&fmt=vtt`
 var srt_url_tran = `https://video.google.com/timedtext?hl=zh-CN&lang=zh-CN&v=kIzFz9T5rhI&fmt=vtt`
 var srt_url = `https://video.google.com/timedtext??hl=en&lang=en&v=kIzFz9T5rhI&fmt=vtt`
