@@ -8,8 +8,6 @@ const FlagTran = 'tran';
 console.log("loaded...")
 window
 //var srt_url_tran = `https://video.google.com/timedtext?hl=zh-TW&lang=zh-TW&v=kIzFz9T5rhI&fmt=vtt`
-var srt_url_tran = `https://video.google.com/timedtext?hl=zh-CN&lang=zh-CN&v=kIzFz9T5rhI&fmt=vtt`
-var srt_url = `https://video.google.com/timedtext??hl=en&lang=en&v=kIzFz9T5rhI&fmt=vtt`
 
 function load_subtitle(url,flag)
 {
@@ -117,6 +115,33 @@ window.add_subtitle=function(v,cur_vtt,cur_vtt_tran,pre_time,next_time)
     }
 }
 
+function get_params_map()
+{
+    var ret = {};
+    var params_str = window.location.search.substring(1);
+    if(params_str)
+    {
+        var param_strs = params_str.split("&");
+        for(var i = 0; i < param_strs.length; i++)
+        {
+            var param_= param_strs[i];
+            var pair =  param_.split("=");
+            if(pair && pair.length == 2)
+            {
+                ret[pair[0]] = pair[1];
+            }
+
+        }
+    }
+    return ret;
+}
+
+function get_params(name)
+{
+    var ret = get_params_map();
+    return  ret[name];
+}
+
 var jquery_url = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
 var vtt_url = 'https://quuz.org/webvtt/parser.js'
 
@@ -151,6 +176,19 @@ function troggle(v)
 
 setTimeout( function() {
     console.log("window loaded");
+
+    var v_id = get_params("v");
+    if(!v_id)
+    {
+        alert("没有获取到视频id");
+        return;
+    }
+
+    var srt_url_tran = `https://video.google.com/timedtext?hl=zh-CN&lang=zh-CN&v=${v_id}&fmt=vtt`
+    var srt_url = `https://video.google.com/timedtext??hl=en&lang=en&v=${v_id}&fmt=vtt`
+
+
+    //alert(v_id);
     load_subtitle(srt_url,FlagEn);
     load_subtitle(srt_url_tran,FlagTran)
 
