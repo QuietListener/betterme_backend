@@ -47,7 +47,7 @@ window.add_subtitle=function(v,cur_vtt,cur_vtt_tran,pre_time,next_time)
     if(pre_time!=null && pre_time>=0)
     {
         console.log("add pre_time");
-        var node_pre = jQuery(`<div id="pre_btn" style="color:white;width:10%;display:inline-block;vertical-align: middle">pre</div>`);
+        var node_pre = jQuery(`<div id="pre_btn" style="color:white;width:10%;display:inline-block;vertical-align: middle"><<pre></div>`);
         node_pre.on("click", function(){
             if(v)
             {
@@ -75,6 +75,21 @@ window.add_subtitle=function(v,cur_vtt,cur_vtt_tran,pre_time,next_time)
     nodes.append(subtitles);
 
 
+    if(next_time!=null && next_time>=0)
+    {
+        console.log("add next_time");
+        var node_pre = jQuery(`<div id="next_btn" style="color:white;width:10%;display:inline-block;vertical-align: middle">></div>`);
+        node_pre.on("click", function(){
+            if(v)
+            {
+                console.log("set currentTime:",next_time);
+                v.currentTime = next_time;
+            }
+        });
+
+        nodes.append(node_pre);
+    }
+
 
 
     if(window.vvt_node)
@@ -89,7 +104,7 @@ window.add_subtitle=function(v,cur_vtt,cur_vtt_tran,pre_time,next_time)
     //     troggle(v); })
 
     var append_position = null;
-    var selectors = ["#watch-headline-title"]
+    var selectors = ["#watch-headline-title","#container","#container > h1.title.style-scope.ytd-video-primary-info-renderer"]
     for(let i = 0; i < selectors.length; i++)
     {
         append_position = jQuery(selectors[i]);
@@ -103,9 +118,11 @@ window.add_subtitle=function(v,cur_vtt,cur_vtt_tran,pre_time,next_time)
         }
     }
 
+    //alert(append_position);
+
     if(append_position != null)
     {
-        window.vvt_node.insertBefore(append_position);
+        window.vvt_node.insertAfter(append_position);
 
         console.log("append_position is ",append_position[0]);
     }
@@ -249,10 +266,24 @@ setTimeout( function() {
                 if(changed == true)
                 {
                     var en_cur_vtt = null;
+                    var pre_time = null;
+                    var next_time = null;
+
                     if(window.vtt_index && window.vtt_index >= 0)
                     {
                         en_cur_vtt = window.vtt.cues[window.vtt_index];
                         console.log(`en: ${en_cur_vtt.startTime} : ${en_cur_vtt.text}`)
+
+                        if( window.vtt_index > 1)
+                        {
+                            pre_time = window.vtt.cues[window.vtt_index-1].startTime;
+                        }
+
+                        if( window.vtt_index < window.vtt.cues.length-1)
+                        {
+                            next_time = window.vtt.cues[window.vtt_index+1].startTime;
+                        }
+
                     }
 
                     var en_cur_vtt_tran = null;
@@ -262,7 +293,7 @@ setTimeout( function() {
                         console.log(`tran: ${en_cur_vtt_tran.startTime} : ${en_cur_vtt_tran.text}`)
                     }
 
-                    window.add_subtitle(v,en_cur_vtt,en_cur_vtt_tran,0,null);
+                    window.add_subtitle(v,en_cur_vtt,en_cur_vtt_tran,pre_time,next_time);
 
                 }
 
