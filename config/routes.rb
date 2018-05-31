@@ -113,12 +113,13 @@ Rails.application.routes.draw do
   get  "api/my_packages" => "dict#api_my_packages"
 
   get  "api/statistics" => "dict#api_statistics"
-
+  get  "api/latest_version" => "dict#api_latest_version"
 
   match 'api/my_words'=> 'application#options_result',via: [:options]
 
 
-
-
   get "backend/users"=>"backend#users"
+  get "backend/latest_version"=>"backend#latest_version"
+  post "backend/add_new_client_version"=>"backend#add_new_client_version"
+
 end

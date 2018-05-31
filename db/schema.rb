@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180512094255) do
+ActiveRecord::Schema.define(version: 20180531063315) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20180512094255) do
   end
 
   add_index "cache_configs", ["key"], name: "idx_config_key", unique: true, using: :btree
+
+  create_table "client_versions", force: :cascade do |t|
+    t.integer  "client_type",  limit: 4
+    t.integer  "version",      limit: 4
+    t.string   "desc",         limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "download_url", limit: 2048
+  end
 
   create_table "ensure_codes", force: :cascade do |t|
     t.string   "phone",      limit: 255

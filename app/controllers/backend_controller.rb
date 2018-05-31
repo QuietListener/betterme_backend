@@ -18,6 +18,30 @@ class BackendController < ApplicationController
     @uall = User.order("created_at desc").paginate(:page => params[:page], :per_page => 10)
   end
 
+
+
+  def latest_version
+    @cv_ios = ClientVersion.getLatestIOS();
+    @cv_android = ClientVersion.getLatestAndroid()
+
+  end
+
+  def add_new_client_version
+    client_type = params[:client_type]
+
+    if !client_type.blank? and  [ClientVersion::IOS,ClientVersion::ANDROID].include?(client_type.to_i)
+      cv = ClientVersion.new
+      cv.client_type=client_type
+      cv.version=params[:version]
+      cv.download_url = params[:download_url]
+      cv.desc = params[:desc]
+      cv.save!
+    end
+
+    redirect_to :action => :latest_version
+
+  end
+
 end
 
 

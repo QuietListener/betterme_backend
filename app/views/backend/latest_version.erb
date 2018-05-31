@@ -1,0 +1,56 @@
+
+<%= javascript_include_tag 'jquery.min' %>
+
+<style>
+  .video-box
+  {
+    border:1px solid black;
+    padding:4px;
+    margin:8px;
+  }
+  div{
+    margin:6px;
+  }
+</style>
+<div>
+  <form action="/backend/add_new_client_version" method="post">
+
+    <div>
+    <select name="client_type">
+      <option selected value=<%=ClientVersion::IOS%>>  IOS</option>
+      <option value=<%=ClientVersion::ANDROID%>> Android</option>
+    </select>
+
+    <input  placeholder="verison" name="version">
+
+    </div>
+
+    <div><textarea placeholder="url" name="download_url" rows="2" cols="100"></textarea></div>
+   
+    <div><textarea placeholder="desc" name="desc" rows="4" cols="100"></textarea></div>
+
+   
+    <button type="submit">确定</button>
+  </form>
+</div>
+
+<div>
+  <%[@cv_ios,@cv_android].each do |v|%>
+    <div class="video-box">
+
+      <% next if v.blank?%>
+      <div style="width:60%;display:inline-block">
+        <%=v.id%> |
+        <%=v.client_type == ClientVersion::IOS ? "IOS":"ANDROID" %> |
+        <%=v.version||"no verison"%> |
+        <%=v.desc || "no desc" %> |
+        <%=v.created_at%>
+       
+        <%=v.download_url || "no download_url" %>
+
+      </div>
+    </div>
+
+  <%end%>
+</div>
+

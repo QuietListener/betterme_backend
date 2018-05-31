@@ -359,6 +359,17 @@ class DictController < ApplicationController
     respond_to_ok(ret,"ok");
   end
 
+  def api_latest_version
+     client_type = params[:client_type]
+     cv = ClientVersion.where(:client_type=>client_type).order("created_at desc").first
+
+     if cv.blank?
+       cv = {}
+     end
+
+     respond_to_ok(cv,"ok");
+  end
+
 end
 
 
