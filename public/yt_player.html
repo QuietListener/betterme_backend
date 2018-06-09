@@ -10,8 +10,12 @@
         {
             min-height: 36px;
             font-size: 12px;
-            border:1px solid black;
+
             margin:2px;
+        }
+
+        .tip{
+          margin-right: 4px;
         }
     </style>
 </header>
@@ -161,7 +165,7 @@
             let cue = vtt.cues[i];
             let startTime = cue.startTime
             let text = cue.text;
-            let node = jQuery(`<div class="vtt-node" onclick="goto_vtt(${i})" id="vtt_node_${i}"><span style="width:50px">${i}</span>:<span>${text}</span></div>`);
+            let node = jQuery(`<div class="vtt-node" onclick="goto_vtt(${i})" id="vtt_node_${i}"><span class="tip">${i}</span><span>${text}</span></div>`);
 
             let node_href = jQuery(`<a id="vtt_node_href_${i}" href="#vtt_node_${i}"></a>`);
 
@@ -190,7 +194,8 @@
                             window.current_vtt_index = j;
                             //console.log(`current_time=${current_time} current_vtt_index = ${j}`);
 
-                            jQuery(".vtt-node").css("color","black");
+                            jQuery(".vtt-node").css("color","black").css("font-size","14px");
+
                             var cur_node = jQuery(`#vtt_node_${window.current_vtt_index}`);
                             cur_node.css("color","red");
                             if(window.current_vtt_index - 3>0) {
@@ -211,10 +216,12 @@
 
 
 <div style="margin:auto">
-    <div style="width:900px">
+    <div style="width:1000px">
         <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-        <div id="player" style="display:inline-block"></div>
-        <div id="vtt_div" style="height:300px;width:50%;overflow-y: scroll;display:inline-block">
+        <div style="width:440px;display: inline-block">
+            <div id="player" style="display:inline-block"></div>
+        </div>
+        <div id="vtt_div" style="height:300px;;overflow-y: scroll;display:inline-block;width:400px;padding:2px">
     </div>
 </div>
 </div>
