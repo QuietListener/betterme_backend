@@ -8,6 +8,7 @@
     <style>
         .vtt-node
         {
+            min-height: 36px;
             font-size: 12px;
             border:1px solid black;
             margin:2px;
@@ -15,8 +16,7 @@
     </style>
 </header>
 <body>
-<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-<div id="player"></div>
+
 
 <script>
 
@@ -32,8 +32,8 @@
     var player;
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '80',
-            width: '120',
+            height: '300',
+            width: '400',
             videoId: v_id,
             events: {
                 'onReady': onPlayerReady,
@@ -193,8 +193,8 @@
                             jQuery(".vtt-node").css("color","black");
                             var cur_node = jQuery(`#vtt_node_${window.current_vtt_index}`);
                             cur_node.css("color","red");
-                            if(window.current_vtt_index-2>0) {
-                                let href = jQuery(`#vtt_node_href_${window.current_vtt_index - 2}`)[0]
+                            if(window.current_vtt_index - 3>0) {
+                                let href = jQuery(`#vtt_node_href_${window.current_vtt_index - 3}`)[0]
                                 //console.log(href);
                                 href.click();
                             }
@@ -210,8 +210,13 @@
 </script>
 
 
-<div id="vtt_div" style="height:400px;overflow-y: scroll">
-
+<div style="margin:auto">
+    <div style="width:900px">
+        <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+        <div id="player" style="display:inline-block"></div>
+        <div id="vtt_div" style="height:300px;width:50%;overflow-y: scroll;display:inline-block">
+    </div>
+</div>
 </div>
 </body>
 </html>
