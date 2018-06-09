@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='https://quuz.org/webvtt/parser.js'></script>
+
+    <style>
+        .vtt-node
+        {
+            font-size: 12px;
+            border:1px solid black;
+            margin:2px;
+        }
+    </style>
+</header>
+<body>
+<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+<div id="player"></div>
+
+<script>
+
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '80',
+            width: '120',
+            videoId: v_id,
+            events: {
+                'onReady': onPlayerReady,
+                //'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+
+
+
+    function get_params_map()
+    {
+        var ret = {};
+        var params_str = window.location.search.substring(1);
+        if(params_str)
+        {
+            var param_strs = params_str.split("&");
+            for(var i = 0; i < param_strs.length; i++)
+            {
+                var param_= param_strs[i];
+                var pair =  param_.split("=");
+                if(pair && pair.length == 2)
+                {
+                    ret[pair[0]] = pair[1];
+                }
+
+            }
+        }
+        return ret;
+    }
+
+    function get_params(name)
+    {
+        var ret = get_params_map();
+        return  ret[name];
+    }
+
+    function load_subtitle(url,flag)
+    {
+        console.log("load_subtitle:",url)
+        jQuery.ajax({
+            type: "GET",
+            url: url,
+            // dataType: "html/text",
+            success: function(data){
+                //console.log("success",data);
+
+                var parser = new WebVTTParser();
+                var tree = parser.parse(data);
+                console.log("tree",tree);
+                if(flag == FlagEn)
+                {
+                    window.vtt = tree;
+                    vvt_list(window.vtt);
+                }
+                else if(flag == FlagTran)
+                {
+                    window.vtt_tran = tree;
+                }
+            },
+            complete:function(data)
+            {
+                console.log("complete",data);
+            }
+
+        });
+    }
+
+
+    const FlagEn = "en";
+    const FlagTran = 'tran';
+
+    const v_id = get_params("v");
+
+    function load_srt(v_id)
+    {
+        var srt_url_tran = `https://video.google.com/timedtext?hl=zh-CN&lang=zh-CN&v=${v_id}&fmt=vtt`
+        var srt_url = `https://video.google.com/timedtext??hl=en&lang=en&v=${v_id}&fmt=vtt`
+        //alert(v_id);
+        load_subtitle(srt_url,FlagEn);
+        load_subtitle(srt_url_tran,FlagTran);
+    }
+
+    function goto_vtt(i)
+    {
+        if(player && player.seekTo && player.playVideo)
+        {
+            if(window && window.vtt && window.vtt.cues)
+            {
+                var cues = window.vtt.cues;
+                if(i < cues.length)
+                {
+                    player.seekTo(cues[i].startTime-0.5);
+                    player.playVideo();
+                }
+            }
+        }
+    }
+
+    function vvt_list(vtt)
+    {
+        var vvtNode = jQuery("#vtt_div");
+        window.node_hrefs = [];
+        for(let i = 0; i<vtt.cues.length; i++)
+        {
+            let cue = vtt.cues[i];
+            let startTime = cue.startTime
+            let text = cue.text;
+            let node = jQuery(`<div class="vtt-node" onclick="goto_vtt(${i})" id="vtt_node_${i}"><span style="width:50px">${i}</span>:<span>${text}</span></div>`);
+
+            let node_href = jQuery(`<a id="vtt_node_href_${i}" href="#vtt_node_${i}"></a>`);
+
+            vvtNode.append(node);
+            vvtNode.append(node_href);
+        }
+    }
+
+    load_srt(v_id);
+
+    setInterval(function(){
+        if(player && player.getCurrentTime)
+        {
+            var current_time = player.getCurrentTime();
+
+            if(window.vtt && window.vtt.cues)
+            {
+                var cues = window.vtt.cues;
+                for(var j = 0; j<cues.length; j++)
+                {
+
+                    if(current_time<=cues[j].endTime)
+                    {
+                        if(j != window.current_vtt_index)
+                        {
+                            window.current_vtt_index = j;
+                            //console.log(`current_time=${current_time} current_vtt_index = ${j}`);
+
+                            jQuery(".vtt-node").css("color","black");
+                            var cur_node = jQuery(`#vtt_node_${window.current_vtt_index}`);
+                            cur_node.css("color","red");
+                            if(window.current_vtt_index-2>0) {
+                                let href = jQuery(`#vtt_node_href_${window.current_vtt_index - 2}`)[0]
+                                //console.log(href);
+                                href.click();
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+    },200);
+
+</script>
+
+
+<div id="vtt_div" style="height:400px;overflow-y: scroll">
+
+</div>
+</body>
+</html>

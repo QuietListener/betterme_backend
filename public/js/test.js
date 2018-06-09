@@ -6,7 +6,7 @@ const FlagEn = "en";
 const FlagTran = 'tran';
 
 console.log("loaded...")
-window
+
 //var srt_url_tran = `https://video.google.com/timedtext?hl=zh-TW&lang=zh-TW&v=kIzFz9T5rhI&fmt=vtt`
 
 function load_subtitle(url,flag)
@@ -202,7 +202,7 @@ setTimeout( function() {
     }
 
     var srt_url_tran = `https://video.google.com/timedtext?hl=zh-CN&lang=zh-CN&v=${v_id}&fmt=vtt`
-    var srt_url = `https://video.google.com/timedtext??hl=en&lang=en&v=${v_id}&fmt=vtt`
+    var srt_url = `https://video.google.com/timedtext?hl=en&lang=en&v=${v_id}&fmt=vtt`
 
 
     //alert(v_id);
