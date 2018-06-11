@@ -9,9 +9,11 @@
         .vtt-node
         {
             min-height: 36px;
-            font-size: 12px;
-
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
             margin:2px;
+            color:white;
         }
 
         .tip{
@@ -36,8 +38,8 @@
     var player;
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '300',
-            width: '400',
+            height: '600',
+            width: '800',
             videoId: v_id,
             events: {
                 'onReady': onPlayerReady,
@@ -165,7 +167,7 @@
             let cue = vtt.cues[i];
             let startTime = cue.startTime
             let text = cue.text;
-            let node = jQuery(`<div class="vtt-node" onclick="goto_vtt(${i})" id="vtt_node_${i}"><span class="tip">${i}</span><span>${text}</span></div>`);
+            let node = jQuery(`<div class="vtt-node" onclick="goto_vtt(${i})" id="vtt_node_${i}"><span class="tip"></span><span>${text}</span></div>`);
 
             let node_href = jQuery(`<a id="vtt_node_href_${i}" href="#vtt_node_${i}"></a>`);
 
@@ -194,12 +196,12 @@
                             window.current_vtt_index = j;
                             //console.log(`current_time=${current_time} current_vtt_index = ${j}`);
 
-                            jQuery(".vtt-node").css("color","black").css("font-size","14px");
+                            jQuery(".vtt-node").css("color","white").css("font-size","20px").css("text-decoration","none");
 
                             var cur_node = jQuery(`#vtt_node_${window.current_vtt_index}`);
-                            cur_node.css("color","red");
-                            if(window.current_vtt_index - 3>0) {
-                                let href = jQuery(`#vtt_node_href_${window.current_vtt_index - 3}`)[0]
+                            cur_node.css("color","white").css("font-size","20px").css("text-decoration","underline");
+                            if(window.current_vtt_index - 2>0) {
+                                let href = jQuery(`#vtt_node_href_${window.current_vtt_index - 2}`)[0]
                                 //console.log(href);
                                 href.click();
                             }
@@ -215,13 +217,16 @@
 </script>
 
 
-<div style="margin:auto">
+<div style="margin:auto;">
     <div style="width:1000px">
         <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
         <div style="width:440px;display: inline-block">
             <div id="player" style="display:inline-block"></div>
         </div>
-        <div id="vtt_div" style="height:300px;;overflow-y: scroll;display:inline-block;width:400px;padding:2px">
+        <div id="vtt_div" style="height:180px;padding:8px;
+        overflow-y: scroll;display:inline-block;width:800px;
+        padding:2px;position: absolute;left:4px;
+        background-color:rgba(0,0,0,0.5);top:360px;z-index: 1001">
     </div>
 </div>
 </div>
