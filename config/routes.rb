@@ -122,4 +122,6 @@ Rails.application.routes.draw do
   get "backend/latest_version"=>"backend#latest_version"
   post "backend/add_new_client_version"=>"backend#add_new_client_version"
 
+  get "youtube/index"=>"youtube#index"
+
 end
