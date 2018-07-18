@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180531063315) do
+ActiveRecord::Schema.define(version: 20180718075335) do
 
   create_table "cache_configs", force: :cascade do |t|
     t.string   "key",        limit: 100, null: false
@@ -30,6 +30,21 @@ ActiveRecord::Schema.define(version: 20180531063315) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "download_url", limit: 2048
+  end
+
+  create_table "cp_sessions", force: :cascade do |t|
+    t.string   "words_ids",         limit: 255
+    t.string   "choices_words_ids", limit: 255
+    t.integer  "user1_id",          limit: 4
+    t.integer  "user2_id",          limit: 4
+    t.string   "user1_choices",     limit: 255
+    t.string   "user2_choices",     limit: 255
+    t.string   "user1_used_time",   limit: 255
+    t.string   "user2_used_time",   limit: 255
+    t.integer  "user1_idx",         limit: 4
+    t.integer  "user2_idx",         limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "ensure_codes", force: :cascade do |t|
