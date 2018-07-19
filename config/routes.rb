@@ -124,4 +124,11 @@ Rails.application.routes.draw do
 
   get "youtube/index"=>"youtube#index"
 
+
+  post "cp/start_compete"=>"cp#start_compete"
+  get  "cp/compete_stat"=>"cp#compete_stat"
+  post "cp/post_compete_data" => "cp#post_compete_data"
+
+  match 'cp/start_compete'=> 'application#options_result',via: [:options]
+
 end

@@ -18,7 +18,6 @@ class CreateCpSessions < ActiveRecord::Migration
       t.integer :user2_idx
 
       t.timestamps null: false
-
     end
   end
 end

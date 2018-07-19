@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 
   def  get_user
     access_token = cookies[:access_token] || params[:access_token]
+    access_token = params[:access_token]
     if access_token.blank?
       raise Exception.new("没有登录")
     end
@@ -26,7 +27,6 @@ class ApplicationController < ActionController::Base
     if access_token.blank?
       raise Exception.new("登录过期")
     end
-
 
   end
 

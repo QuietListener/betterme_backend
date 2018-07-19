@@ -13,7 +13,7 @@ class CpController < ApplicationController
 
   def start_compete
 
-     cpSession = CpSession.where("user2_id <= 0",0).first
+     cpSession = CpSession.where("(user2_id <= 0 or user2_id is null) && user1_id != ?",@user.id).first
 
      #创建一个
      if not cpSession
@@ -42,8 +42,8 @@ class CpController < ApplicationController
 
 
   def compete_stat
-    cpSession = CpSession.where(:id=>params[:id]);
-    if(@user.id != cpSession.user1_id || @user.id != cpSession.user2_id)
+    cpSession = CpSession.where(:id=>params[:id]).last
+    if(@user.id != cpSession.user1_id && @user.id != cpSession.user2_id)
       raise Exception.new("你不在这场比赛")
     end
 
@@ -52,29 +52,25 @@ class CpController < ApplicationController
 
 
   def post_compete_data
-    cpSession = CpSession.where(:id=>params[:id]);
+    cpSession = CpSession.where(:id=>params[:id]).last;
 
     cpSession.with_lock do
 
-      if(@user.id != cpSession.user1_id || @user.id != cpSession.user2_id)
+      if(@user.id != cpSession.user1_id && @user.id != cpSession.user2_id)
         raise Exception.new("你不在这场比赛")
       end
 
       user_choices = params[:user_choices]||""
       used_time = params[:used_time]||""
-
-      user_choices_array = user_choices.split(",")
+      #user_choices_array = user_choices.split(",")
       question_idx = params[:question_idx]
 
       if @user.id == cpSession.user1_id
-        cur_idx = cpSession.user1_idx
 
         cpSession.user1_idx = question_idx
         cpSession.user1_choices = user_choices;
         cpSession.user1_used_time = used_time;
-
       else
-        cur_idx = cpSession.user2_idx
         cpSession.user2_idx = question_idx
         cpSession.user2_choices = user_choices;
         cpSession.user2_used_time = used_time;
@@ -82,7 +78,7 @@ class CpController < ApplicationController
 
       cpSession.save!
     end
-      
+
     respond_to_ok(cpSession.as_json_data,"ok")
   end
 
